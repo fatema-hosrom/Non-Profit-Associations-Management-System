@@ -1,0 +1,377 @@
+/* ========== الأساسيات العامة ========== */
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* ========== البطاقات والعناوين ========== */
+.card,
+.form-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    border-color: #3498db;
+}
+
+.form-title,
+.page-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ========== الحقول والإدخال ========== */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    flex: 1;
+    min-width: 250px;
+}
+
+.input-group-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.input-group-label i {
+    color: #3498db;
+    font-size: 1.2em;
+    width: 20px;
+    text-align: center;
+}
+
+.form-label {
+    color: #2c3e50;
+    font-weight: 500;
+    display: block;
+}
+
+.form-control {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* ========== الأزرار ========== */
+.btn,
+.btn-submit,
+.add-btn,
+.back-btn {
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 8px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover,
+.btn-submit:hover,
+.add-btn:hover,
+.back-btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-submit {
+    background-color: #3498db;
+    color: white;
+    border: none;
+}
+
+.btn-submit:hover {
+    background-color: #2980b9;
+}
+
+.add-btn {
+    background-color: #3498db;
+    border: none;
+    color: #fff;
+    padding: 7px 15px;
+}
+
+.add-btn:hover {
+    background-color: #217dbb;
+}
+
+.back-btn {
+    background-color: #95a5a6;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.back-btn:hover {
+    background-color: #7f8c8d;
+}
+
+/* ========== جدول الفعاليات والجمعيات ========== */
+.table th i {
+    margin-left: 5px;
+    color: #3498db;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ========== صور الفعالية والجمعية ========== */
+.event-img-preview,
+.activity-img-preview,
+.org-img-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+/* ========== معلومات العرض ========== */
+.info-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #2c3e50;
+}
+
+.info-block span {
+    max-width: 500px;
+    display: block;
+    margin-top: 4px;
+    line-height: 1.6;
+    color: #2c3e50;
+}
+
+.table td,
+.table th {
+    word-break: break-word;
+    white-space: normal;
+    vertical-align: middle;
+}
+
+.event-title-cell {
+    max-width: 250px;
+}
+
+.table td,
+.table th {
+    word-break: break-word;
+    white-space: normal;
+    vertical-align: middle;
+}
+
+.event-title-cell {
+    max-width: 250px;
+}
+
+.modal-content {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    will-change: auto !important;
+}
+
+.modal-header .btn-close,
+.modal-footer .btn {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.modal.fade .modal-dialog {
+    transition: none !important;
+    transform: none !important;
+}
+
+.modal.show .modal-dialog {
+    transform: none !important;
+}
+
+/* ========== استجابة الشاشات الصغيرة ========== */
+@media (max-width: 768px) {
+    .form-card {
+        padding: 15px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .input-container {
+        flex: 100%;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .event-img-preview,
+    .activity-img-preview,
+    .org-img-preview {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .info-block {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+/* ===== بطاقة العرض ===== */
+.event-card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    padding: 35px;
+    border-right: 5px solid #3498db;
+    transition: 0.3s ease;
+}
+
+.event-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.event-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.event-title i {
+    color: #3498db;
+}
+
+/* ===== بلوكات المعلومات ===== */
+.info-block {
+    background: #f9fafc;
+    border-radius: 12px;
+    padding: 15px 18px;
+    margin-bottom: 15px;
+    border: 1px solid #e1e6ec;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-block i {
+    color: #3498db;
+    font-size: 1.25rem;
+}
+
+.info-block strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.info-block span {
+    flex: 1;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* ===== صورة الفعالية ===== */
+.event-img {
+    width: 100%;
+    max-width: 360px;
+    border-radius: 15px;
+    border: 3px solid #eee;
+    object-fit: cover;
+    transition: 0.3s ease;
+}
+
+.event-img:hover {
+    transform: scale(1.03);
+    border-color: #3498db;
+}
+
+/* ===== زر العودة ===== */
+.btn-back {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* ===== زر الرابط ===== */
+.btn-event-link {
+    background: #2ecc71;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.3s ease;
+}
+
+.btn-event-link:hover {
+    background: #27ae60;
+    transform: translateY(-2px);
+}
+
+/* ===== استجابة الشاشات ===== */
+@media(max-width: 992px) {
+    .main-content {
+        margin-right: 0;
+        padding: 20px;
+    }
+}

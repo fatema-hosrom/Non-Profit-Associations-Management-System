@@ -1,0 +1,102 @@
+.page-shell {
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.soft-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+}
+
+.hero-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.05);
+}
+
+.hero-title {
+    color: #0f172a;
+    text-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.muted-text {
+    color: #64748b;
+}
+
+.metric-card {
+    transition: all 0.25s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+}
+
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.report-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.report-table thead th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 1rem 1.25rem;
+    text-align: right;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.report-table tbody td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.report-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.form-input {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 1rem;
+    padding: 0.9rem 1rem;
+    background: white;
+    transition: 0.2s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #ef4444;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
+}
+
+.btn {
+    border-radius: 1rem;
+    padding: 0.9rem 1.2rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.8rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}

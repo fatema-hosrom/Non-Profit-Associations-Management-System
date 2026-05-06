@@ -1,0 +1,121 @@
+.chart-container {
+    position: relative;
+    height: 320px;
+    width: 100%;
+}
+
+.dashboard-shell {
+    min-height: 100vh;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(226, 232, 240, 1);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    transition: all 0.25s ease;
+    overflow: hidden;
+}
+
+.glass-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.hero-block {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 1) 100%);
+    border: 1px solid rgba(226, 232, 240, 1);
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05);
+}
+
+.soft-highlight {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+    border: 1px solid #e2e8f0;
+}
+
+.stat-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.table-head {
+    background: #f8fafc;
+}
+
+.table-row:hover {
+    background: #fafafa;
+}
+
+.quick-link {
+    transition: all 0.25s ease;
+}
+
+.quick-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.07);
+}
+
+.section-title {
+    color: #0f172a;
+    letter-spacing: -0.5px;
+}
+
+.muted-text {
+    color: #64748b;
+}
+
+.hero-title {
+    color: #0f172a;
+    text-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.8),
+        0 8px 20px rgba(15, 23, 42, 0.10);
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    color: #64748b;
+}
+
+.equal-card {
+    height: 100%;
+}
+
+.bottom-grid {
+    align-items: stretch;
+}
+
+.compact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.compact-links .quick-link {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.no-horizontal-scroll {
+    overflow-x: hidden;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-wrap table {
+    min-width: 100%;
+}
+
+@media (max-width: 1279px) {
+    .equal-card {
+        height: auto;
+    }
+}

@@ -1,0 +1,61 @@
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+.info-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px #b0c4de22;
+    padding: 24px;
+    width: 320px;
+    margin-bottom: 18px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-draft {
+    background-color: #e2e8f0;
+    color: #64748b;
+}
+
+.status-active {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-closed {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.results-badge {
+    background-color: #10b981;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+.dropdown-item.active {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.dropdown-menu {
+    text-align: right;
+}
+
+.dropdown-item i {
+    margin-left: 8px;
+}

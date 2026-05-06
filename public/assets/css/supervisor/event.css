@@ -1,0 +1,107 @@
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.main-content {
+    padding: 30px 0;
+}
+
+.event-details-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #b0c4de33;
+    padding: 38px;
+    margin-bottom: 30px;
+}
+
+.event-img-preview {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 2px solid #3498db;
+    background: #f4f8fb;
+}
+
+.manager-badge {
+    background: linear-gradient(90deg, #3498db 0%, #1976d2 100%);
+    color: #fff;
+    border-radius: 15px;
+    padding: 7px 22px;
+    font-size: 1.05rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px #3498db22;
+    margin-bottom: 10px;
+}
+
+.info-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.info-block i {
+    color: #3498db;
+    font-size: 1.2em;
+}
+
+.section-title {
+    color: #1976d2;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-info {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 8px 20px;
+    background: linear-gradient(90deg, #17a2b8 0%, #3498db 100%);
+    color: #fff;
+    border: none;
+}
+
+.btn-info:hover {
+    background: #138496;
+}
+
+.btn-event-link {
+    background: linear-gradient(90deg, #3498db 0%, #1976d2 100%);
+    color: #fff;
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: .95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.page-title {
+    color: #3498db;
+    font-weight: 700;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width:768px) {
+    .event-details-card {
+        padding: 14px;
+    }
+
+    .event-img-preview {
+        width: 80px;
+        height: 80px;
+    }
+}

@@ -1,0 +1,186 @@
+[
+    {
+        "code": "SA",
+        "name_ar": "السعودية"
+    },
+    {
+        "code": "AE",
+        "name_ar": "الإمارات"
+    },
+    {
+        "code": "KW",
+        "name_ar": "الكويت"
+    },
+    {
+        "code": "QA",
+        "name_ar": "قطر"
+    },
+    {
+        "code": "OM",
+        "name_ar": "عُمان"
+    },
+    {
+        "code": "BH",
+        "name_ar": "البحرين"
+    },
+    {
+        "code": "EG",
+        "name_ar": "مصر"
+    },
+    {
+        "code": "JO",
+        "name_ar": "الأردن"
+    },
+    {
+        "code": "SY",
+        "name_ar": "سوريا"
+    },
+    {
+        "code": "LB",
+        "name_ar": "لبنان"
+    },
+    {
+        "code": "IQ",
+        "name_ar": "العراق"
+    },
+    {
+        "code": "YE",
+        "name_ar": "اليمن"
+    },
+    {
+        "code": "MA",
+        "name_ar": "المغرب"
+    },
+    {
+        "code": "TN",
+        "name_ar": "تونس"
+    },
+    {
+        "code": "DZ",
+        "name_ar": "الجزائر"
+    },
+    {
+        "code": "LY",
+        "name_ar": "ليبيا"
+    },
+    {
+        "code": "SD",
+        "name_ar": "السودان"
+    },
+    {
+        "code": "PS",
+        "name_ar": "فلسطين"
+    },
+    {
+        "code": "TR",
+        "name_ar": "تركيا"
+    },
+    {
+        "code": "IR",
+        "name_ar": "إيران"
+    },
+    {
+        "code": "PK",
+        "name_ar": "باكستان"
+    },
+    {
+        "code": "IN",
+        "name_ar": "الهند"
+    },
+    {
+        "code": "BD",
+        "name_ar": "بنغلاديش"
+    },
+    {
+        "code": "AF",
+        "name_ar": "أفغانستان"
+    },
+    {
+        "code": "US",
+        "name_ar": "الولايات المتحدة"
+    },
+    {
+        "code": "CA",
+        "name_ar": "كندا"
+    },
+    {
+        "code": "UK",
+        "name_ar": "المملكة المتحدة"
+    },
+    {
+        "code": "FR",
+        "name_ar": "فرنسا"
+    },
+    {
+        "code": "DE",
+        "name_ar": "ألمانيا"
+    },
+    {
+        "code": "ES",
+        "name_ar": "إسبانيا"
+    },
+    {
+        "code": "IT",
+        "name_ar": "إيطاليا"
+    },
+    {
+        "code": "SE",
+        "name_ar": "السويد"
+    },
+    {
+        "code": "NO",
+        "name_ar": "النرويج"
+    },
+    {
+        "code": "FI",
+        "name_ar": "فنلندا"
+    },
+    {
+        "code": "RU",
+        "name_ar": "روسيا"
+    },
+    {
+        "code": "CN",
+        "name_ar": "الصين"
+    },
+    {
+        "code": "JP",
+        "name_ar": "اليابان"
+    },
+    {
+        "code": "KR",
+        "name_ar": "كوريا الجنوبية"
+    },
+    {
+        "code": "BR",
+        "name_ar": "البرازيل"
+    },
+    {
+        "code": "AR",
+        "name_ar": "الأرجنتين"
+    },
+    {
+        "code": "MX",
+        "name_ar": "المكسيك"
+    },
+    {
+        "code": "ZA",
+        "name_ar": "جنوب أفريقيا"
+    },
+    {
+        "code": "NG",
+        "name_ar": "نيجيريا"
+    },
+    {
+        "code": "KE",
+        "name_ar": "كينيا"
+    },
+    {
+        "code": "AU",
+        "name_ar": "أستراليا"
+    },
+    {
+        "code": "NZ",
+        "name_ar": "نيوزيلندا"
+    }
+]

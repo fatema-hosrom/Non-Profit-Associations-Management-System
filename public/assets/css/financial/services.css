@@ -1,0 +1,16 @@
+/* أنماط مشتركة لواجهات التبرعات والمصاريف والتقارير */
+
+.table-auto th,
+.table-auto td {
+    text-align: center;
+}
+
+.bg-blue-600 a {
+    color: white;
+}
+
+.bg-green-600 a {
+    color: white;
+}
+
+/* يمكن إضافة المزيد من الأنماط حسب الحاجة */

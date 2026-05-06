@@ -1,0 +1,37 @@
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Tajawal';
+    src: url('/assets/fonts/Tajawal/Tajawal-Regular.woff2') format('woff2'),
+        url('/assets/fonts/Tajawal/Tajawal-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tajawal';
+    src: url('/assets/fonts/Tajawal/Tajawal-Medium.woff2') format('woff2'),
+        url('/assets/fonts/Tajawal/Tajawal-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tajawal';
+    src: url('/assets/fonts/Tajawal/Tajawal-Bold.woff2') format('woff2'),
+        url('/assets/fonts/Tajawal/Tajawal-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
