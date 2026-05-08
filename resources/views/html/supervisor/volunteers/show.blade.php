@@ -17,8 +17,18 @@
             <div class="volunteer-header">
                 <div class="volunteer-name">{{ $volunteer->name }}</div>
                 <div class="status {{ $status }}">
-                    {{ $status === 'pending' ? 'معلقة' : ($status === 'accepted' ? 'مقبولة' : 'مرفوضة') }}</div>
+                    {{ $status === 'pending' ? 'معلقة' : ($status === 'active' ? 'نشطة' : 'مرفوضة') }}</div>
             </div>
+            @if (session('success') || session('error'))
+                <div class="max-w-4xl mx-auto mb-6 px-4">
+                    <div
+                        class="rounded-2xl p-4 text-center shadow-sm {{ session('success') ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800' }}">
+                        {{ session('success') ?? session('error') }}
+                    </div>
+                </div>
+            @endif
+
+
             <div class="info-grid">
                 <div class="info-item"><label><i class="fa fa-envelope"></i> البريد
                         الإلكتروني</label><span>{{ $volunteer->email }}</span></div>
@@ -49,13 +59,13 @@
             </div>
             <div class="actions">
                 <form method="POST" action="{{ route('supervisor.volunteers.updateStatus', $volunteer->id) }}">@csrf
-                    @method('PATCH')<input type="hidden" name="status" value="accepted"><button class="btn-accept"
-                        @if ($status === 'accepted') disabled @endif>قبول الطلب</button></form>
+                    @method('PATCH')<input type="hidden" name="status" value="active"><button class="btn-accept"
+                        @if ($status === 'active') disabled @endif>قبول الطلب</button></form>
                 <form method="POST" action="{{ route('supervisor.volunteers.updateStatus', $volunteer->id) }}">@csrf
                     @method('PATCH')<input type="hidden" name="status" value="rejected"><button class="btn-reject"
                         @if ($status === 'rejected') disabled @endif>رفض الطلب</button></form>
             </div>
-            <a href="{{ route('supervisor.volunteers.index') }}" class="back-link">العودة إلى قائمة المتطوعين</a>
+            <a href="{{ route('supervisor.volunteers.index') }}" class="back-link ">العودة إلى قائمة المتطوعين</a>
         </div>
     </div>
 @endsection

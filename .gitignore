@@ -11,3 +11,5 @@
 /.phpunit.cache
 /.vscode
 /.zed
+vendor/
+node_modules/

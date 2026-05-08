@@ -41,7 +41,7 @@ class SupervisorVolunteerController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:accepted,rejected',
+            'status' => 'required|in:active,rejected',
         ]);
 
         $volunteer = Volunteer::findOrFail($id);
