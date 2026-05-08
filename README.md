@@ -9,7 +9,7 @@
 
 **A comprehensive platform for managing volunteer work, organizing events, and connecting organizations with volunteers efficiently.**
 
-[📄 Full System Report](#) | [Features](#-core-features) | [Installation](#-installation--setup) | [Architecture](#-architecture-overview) | [Users](#-main-user-roles)
+[📄 Full System Report](Graduation Project Report 2.pdf) | [Features](#-core-features) | [Installation](#-installation--setup) | [Architecture](#-architecture-overview) | [Users](#-main-user-roles)
 
 </div>
 
