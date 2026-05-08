@@ -1,5 +1,5 @@
 <?php
-// database/migrations/2025_12_05_000001_create_activity_donation_settings_table.php
+// database/migrations/2025_12_05_175907_create_activity_donation_settings_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

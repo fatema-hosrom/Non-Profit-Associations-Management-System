@@ -10,6 +10,15 @@
             </button>
         </div>
 
+            @if(session('success') || session('error'))
+            <div class="max-w-4xl mx-auto mb-6 px-4">
+                <div class="rounded-2xl p-4 text-center shadow-sm {{ session('success') ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800' }}">
+                    {{ session('success') ?? session('error') }}
+                </div>
+            </div>
+            @endif
+
+
         <form action="{{ route('public.activities.payment.process', $activity->id) }}" method="POST" class="grid gap-6 px-7 py-7 bg-white">
             @csrf
 
@@ -17,13 +26,13 @@
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">اسم حامل البطاقة</label>
                     <input type="text" name="card_holder_name" value="{{ old('card_holder_name') }}" required
-                           class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:ring-indigo-200 focus:ring-2">
+                        class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:ring-indigo-200 focus:ring-2">
                     @error('card_holder_name')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">رقم البطاقة</label>
                     <input type="text" name="card_number" value="{{ old('card_number') }}" maxlength="19" required
-                           class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:ring-indigo-200 focus:ring-2">
+                    class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:ring-indigo-200 focus:ring-2">
                     @error('card_number')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                 </div>
             </div>

@@ -169,10 +169,10 @@
                                         @endphp
                                         <div class="relative group">
                                             <img src="{{ $resolvedImage }}"
-                                                 alt="صورة من الفعالية"
-                                                 class="w-full h-48 object-cover rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300 cursor-pointer"
-                                                 onclick="openModal('{{ $resolvedImage }}')"
-                                                 onerror="this.src='/assets/images/placeholder.png'">
+                                                alt="صورة من الفعالية"
+                                                class="w-full h-48 object-cover rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                                                onclick="openModal('{{ $resolvedImage }}')"
+                                                onerror="this.src='/assets/images/placeholder.png'">
                                         </div>
                                     @endif
                                 @endforeach

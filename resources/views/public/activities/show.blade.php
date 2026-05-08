@@ -11,13 +11,6 @@
             <p class="text-gray-600 text-lg">{{ $activity->description }}</p>
         </div>
 
-        @if(session('success') || session('error'))
-            <div class="max-w-4xl mx-auto mb-6 px-4">
-                <div class="rounded-2xl p-4 text-center shadow-sm {{ session('success') ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800' }}">
-                    {{ session('success') ?? session('error') }}
-                </div>
-            </div>
-        @endif
 
         <!-- صورة الفعالية -->
         <div class="mb-8 overflow-hidden rounded-xl shadow-lg">
