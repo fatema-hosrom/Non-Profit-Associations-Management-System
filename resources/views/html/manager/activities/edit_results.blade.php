@@ -48,13 +48,13 @@
                         </div>
                     @endif
 
-                    <!-- نموذج التعديل -->
+                    <!-- Edit Form -->
                     <form method="POST" action="{{ route('manager.activities.results.update', $activity->id) }}"
                         enctype="multipart/form-data" class="space-y-6">
                         @csrf
                         @method('PUT')
 
-                        <!-- معلومات التطوع -->
+                        <!-- Volunteering Info -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
                                 <div class="bg-blue-100 p-3 rounded-lg ml-3">
@@ -64,7 +64,7 @@
                             </h2>
 
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <!-- عدد المتطوعين -->
+                                <!-- Number of Volunteers -->
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
                                         <i class="fas fa-people-group text-blue-600 ml-2"></i>
@@ -80,7 +80,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- مجموع الساعات -->
+                                <!-- Total Hours -->
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
                                         <i class="fas fa-hourglass-end text-green-600 ml-2"></i>
@@ -96,7 +96,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- عدد الحضور -->
+                                <!-- Attendance Count -->
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
                                         <i class="fas fa-clipboard-check text-purple-600 ml-2"></i>
@@ -114,7 +114,7 @@
                             </div>
                         </div>
 
-                        <!-- الأهداف والتحديات -->
+                        <!-- Goals and Challenges -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
                                 <div class="bg-green-100 p-3 rounded-lg ml-3">
@@ -124,7 +124,7 @@
                             </h2>
 
                             <div class="grid grid-cols-1 gap-6">
-                                <!-- الأهداف المحققة -->
+                                <!-- Achieved Goals -->
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
                                         <i class="fas fa-check-double text-green-600 ml-2"></i>
@@ -138,7 +138,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- التحديات -->
+                                <!-- Challenges -->
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
                                         <i class="fas fa-exclamation-triangle text-orange-600 ml-2"></i>
@@ -154,7 +154,7 @@
                             </div>
                         </div>
 
-                        <!-- الملاحظات والمرفقات -->
+                        <!-- Notes and Attachments -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
                                 <div class="bg-purple-100 p-3 rounded-lg ml-3">
@@ -164,7 +164,7 @@
                             </h2>
 
                             <div class="grid grid-cols-1 gap-6">
-                                <!-- الملاحظات -->
+                                <!-- Notes -->
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
                                         <i class="fas fa-sticky-note text-purple-600 ml-2"></i>
@@ -178,7 +178,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- رفع الصور -->
+                                <!-- Upload Images -->
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
                                         <i class="fas fa-image text-indigo-600 ml-2"></i>
@@ -186,7 +186,7 @@
                                         <span class="text-gray-400 text-xs">(اختياري - عدة صور مسموحة)</span>
                                     </label>
 
-                                    <!-- عرض الصور الحالية -->
+                                    <!-- Display Current Images -->
                                     @if($results->images)
                                         <div class="mb-4">
                                             <p class="text-sm text-gray-600 mb-2">الصور الحالية:</p>
@@ -221,7 +221,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- ملف التقرير -->
+                                <!-- Report File -->
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
                                         <i class="fas fa-file-pdf text-red-600 ml-2"></i>
@@ -307,7 +307,7 @@
                 document.getElementById('deleteModal').classList.add('hidden');
             }
 
-            // إغلاق الـ Modal عند النقر خارجه
+            // Close Modal when clicking outside
             document.getElementById('deleteModal')?.addEventListener('click', function(e) {
                 if (e.target === this) {
                     closeDeleteModal();

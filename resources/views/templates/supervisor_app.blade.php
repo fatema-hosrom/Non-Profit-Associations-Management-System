@@ -18,8 +18,7 @@
     @include('templates.navbar')
 
     <main class="main-content">
-        <!-- رسائل النجاح والخطأ - تُطبق على جميع صفحات المشرف -->
-       
+        <!-- Success and Error Messages - applied to all supervisor pages -->
 
         @yield('content')
     </main>

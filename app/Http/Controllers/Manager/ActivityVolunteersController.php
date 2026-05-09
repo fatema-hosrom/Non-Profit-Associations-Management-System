@@ -12,7 +12,7 @@ use TCPDF;
 
 class ActivityVolunteersController extends Controller
 {
-    // عرض قائمة الفعاليات التي تحتاج متطوعين
+    // Display list of activities that need volunteers
     public function index(Request $request)
     {
         $manager = Auth::guard('manager')->user();
@@ -27,7 +27,7 @@ class ActivityVolunteersController extends Controller
                 $q->where('required_volunteers', '>', 0);
             });
 
-        // البحث
+        // Search
         if ($request->has('search') && $request->search !== '') {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -41,7 +41,7 @@ class ActivityVolunteersController extends Controller
         return view('html.manager.activity_volunteers.activity_volunteers', compact('activities'));
     }
 
-    // عرض المتطوعين في فعالية معينة
+    // Display volunteers in a specific activity
     public function show($activityId)
     {
         $manager = Auth::guard('manager')->user();
@@ -57,7 +57,7 @@ class ActivityVolunteersController extends Controller
             ->orderBy('request_date', 'desc')
             ->get();
 
-        // إحصائيات سريعة
+        // Quick statistics
         $stats = [
             'total' => $assignments->count(),
             'pending' => $assignments->where('status', 'pending')->count(),
@@ -68,7 +68,7 @@ class ActivityVolunteersController extends Controller
         return view('html.manager.activity_volunteers.manage_activity_volunteers', compact('activity', 'assignments', 'stats'));
     }
 
-    // إضافة متطوع للفعالية
+    // Add a volunteer to the activity
     public function assignVolunteer(Request $request, $activityId)
     {
         $manager = Auth::guard('manager')->user();
@@ -84,7 +84,7 @@ class ActivityVolunteersController extends Controller
 
         $volunteerId = $request->volunteer_id;
 
-        // التحقق من وجود سجل سابق (سواء نشط أو مرفوض أو محذوف)
+        // Check for existing record (whether active, rejected, or deleted)
         $existingAssignment = ActivityVolunteerAssignment::where('activity_id', $activityId)
             ->where('volunteer_id', $volunteerId)
             ->first();
@@ -92,12 +92,12 @@ class ActivityVolunteersController extends Controller
         if ($existingAssignment) {
             if (in_array($existingAssignment->status, ['pending', 'approved'])) {
                 if ($request->expectsJson()) {
-                    return response()->json(['success' => false, 'message' => 'هذا المتطوع لديه طلب سابق لهذه الفعالية'], 400);
+                    return response()->json(['success' => false, 'message' => 'This volunteer already has a previous request for this activity'], 400);
                 }
-                return back()->with('error', 'هذا المتطوع لديه طلب سابق لهذه الفعالية');
+                return back()->with('error', 'This volunteer already has a previous request for this activity');
             }
 
-            // إذا كان مرفوض أو محذوف، نقوم بتحديث الحالة بدلاً من إضافة سجل جديد
+            // If rejected or deleted, update the status instead of creating a new record
             $existingAssignment->update([
                 'status' => 'approved',
                 'decision_date' => now(),
@@ -105,19 +105,19 @@ class ActivityVolunteersController extends Controller
                 'request_date' => $existingAssignment->request_date ?? now(),
             ]);
 
-            // زيادة عدد المتطوعين للفعالية
+            // Increment volunteer count for the activity
             $requirements = $activity->volunteerRequirements()->first();
             if ($requirements) {
                 $requirements->increment('volunteers_count');
             }
 
             if ($request->expectsJson()) {
-                return response()->json(['success' => true, 'message' => 'تم إعادة تفعيل انضمام المتطوع للفعالية بنجاح']);
+                return response()->json(['success' => true, 'message' => 'Volunteer re-activated for the activity successfully']);
             }
-            return back()->with('success', 'تم إعادة تفعيل انضمام المتطوع للفعالية بنجاح');
+            return back()->with('success', 'Volunteer re-activated for the activity successfully');
         }
 
-        // إنشاء سجل جديد تماماً
+        // Create a completely new record
         ActivityVolunteerAssignment::create([
             'activity_id' => $activityId,
             'volunteer_id' => $volunteerId,
@@ -127,19 +127,19 @@ class ActivityVolunteersController extends Controller
             'request_date' => now(),
         ]);
 
-        // زيادة عدد المتطوعين للفعالية
+        // Increment volunteer count for the activity
         $requirements = $activity->volunteerRequirements()->first();
         if ($requirements) {
             $requirements->increment('volunteers_count');
         }
 
         if ($request->expectsJson()) {
-            return response()->json(['success' => true, 'message' => 'تم إضافة المتطوع للفعالية بنجاح']);
+            return response()->json(['success' => true, 'message' => 'Volunteer added to the activity successfully']);
         }
-        return back()->with('success', 'تم إضافة المتطوع للفعالية بنجاح');
+        return back()->with('success', 'Volunteer added to the activity successfully');
     }
 
-    // قبول طلب متطوع
+    // Approve a volunteer request
     public function approveVolunteer($activityId, $assignmentId)
     {
         $manager = Auth::guard('manager')->user();
@@ -160,16 +160,16 @@ class ActivityVolunteersController extends Controller
             'joined_at' => now(),
         ]);
 
-        // زيادة عدد المتطوعين للفعالية
+        // Increment volunteer count for the activity
         $requirements = $activity->volunteerRequirements()->first();
         if ($requirements) {
             $requirements->increment('volunteers_count');
         }
 
-        return response()->json(['success' => true, 'message' => 'تم قبول طلب المتطوع بنجاح']);
+        return response()->json(['success' => true, 'message' => 'Volunteer request approved successfully']);
     }
 
-    // رفض طلب متطوع
+    // Reject a volunteer request
     public function rejectVolunteer(Request $request, $activityId, $assignmentId)
     {
         $manager = Auth::guard('manager')->user();
@@ -184,7 +184,7 @@ class ActivityVolunteersController extends Controller
             ->whereIn('status', ['pending', 'approved'])
             ->firstOrFail();
 
-        // لم نعد نطلب سبب الرفض بناءً على طلب المستخدم، أو يمكن جعله اختيارياً
+        // Rejection reason is optional per user request
         // $request->validate([
         //     'rejection_reason' => 'required|string|max:500',
         // ]);
@@ -195,7 +195,7 @@ class ActivityVolunteersController extends Controller
             'rejection_reason' => $request->rejection_reason ?? null,
         ]);
 
-        // تقليل عدد المتطوعين للفعالية إذا كان مقبول
+        // Decrement volunteer count if previously approved
         if ($assignment->status === 'approved') {
             $requirements = $activity->volunteerRequirements()->first();
             if ($requirements && $requirements->volunteers_count > 0) {
@@ -203,10 +203,10 @@ class ActivityVolunteersController extends Controller
             }
         }
 
-        return response()->json(['success' => true, 'message' => 'تم رفض طلب المتطوع']);
+        return response()->json(['success' => true, 'message' => 'Volunteer request rejected']);
     }
 
-    // حذف متطوع من الفعالية
+    // Remove a volunteer from the activity
     public function removeVolunteer(Request $request, $activityId, $assignmentId)
     {
         $manager = Auth::guard('manager')->user();
@@ -220,12 +220,12 @@ class ActivityVolunteersController extends Controller
             ->where('activity_id', $activityId)
             ->firstOrFail();
 
-        // إزالة اشتراط سبب الحذف
+        // Removal reason is no longer required
         // $request->validate([
         //     'removal_reason' => 'required|string|max:500',
         // ]);
 
-        // تقليل عدد المتطوعين للفعالية إذا كان مقبول
+        // Decrement volunteer count if previously approved
         if ($assignment->status === 'approved') {
             $requirements = $activity->volunteerRequirements()->first();
             if ($requirements && $requirements->volunteers_count > 0) {
@@ -233,16 +233,16 @@ class ActivityVolunteersController extends Controller
             }
         }
 
-        // بدلاً من الحذف النهائي، نقوم بتغيير الحالة إلى "removed"
+        // Instead of permanent deletion, change status to "removed"
         $assignment->update([
             'status' => 'removed',
-            'rejection_reason' => 'تمت الإزالة من قبل المدير',
+            'rejection_reason' => 'Removed by manager',
         ]);
 
-        return response()->json(['success' => true, 'message' => 'تمت إزالة المتطوع من الفعالية بنجاح']);
+        return response()->json(['success' => true, 'message' => 'Volunteer removed from the activity successfully']);
     }
 
-    // عرض معلومات المتطوع
+    // View volunteer information
     public function viewVolunteer($activityId, $assignmentId)
     {
         $manager = Auth::guard('manager')->user();
@@ -260,7 +260,7 @@ class ActivityVolunteersController extends Controller
         return view('html.manager.activity_volunteers.view_volunteer_details', compact('activity', 'assignment'));
     }
 
-    // الحصول على قائمة المتطوعين المتاحين للإضافة
+    // Get list of available volunteers to add
     public function getAvailableVolunteers($activityId)
     {
         $manager = Auth::guard('manager')->user();
@@ -270,7 +270,7 @@ class ActivityVolunteersController extends Controller
             ->where('manager_id', $managerId)
             ->firstOrFail();
 
-        // المتطوعين الذين لديهم طلب نشط (pending أو approved) فقط
+        // Volunteers who have an active request (pending or approved) only
         $assignedVolunteerIds = ActivityVolunteerAssignment::where('activity_id', $activityId)
             ->whereIn('status', ['pending', 'approved'])
             ->pluck('volunteer_id')
@@ -284,7 +284,7 @@ class ActivityVolunteersController extends Controller
         return response()->json($volunteers);
     }
 
-    // تحميل ملف PDF للمتطوعين مع كود التحقق
+    // Download PDF file for volunteers with verification code
     public function downloadVolunteerPDF($activityId)
     {
         $manager = Auth::guard('manager')->user();
@@ -300,7 +300,7 @@ class ActivityVolunteersController extends Controller
             ->where('status', 'approved')
             ->get();
 
-        // توليد أكواد تحقق للمتطوعين الذين ليس لديهم كود بعد
+        // Generate verification codes for volunteers who don't have one yet
         foreach ($assignments as $assignment) {
             if (!$assignment->checkin_code) {
                 $assignment->update([

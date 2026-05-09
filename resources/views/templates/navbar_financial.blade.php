@@ -16,7 +16,7 @@
                 الملف الشخصي
             </a>
         </li>
-        <!-- روابط مالية إضافية -->
+        <!-- Additional Financial Links -->
         <li class="nav-item">
             <a class="nav-link <?php echo request()->is('financial/donations*') ? 'active' : ''; ?>" href="<?php echo e(route('financial.donations.index')); ?>">
                 <i class="fas fa-hand-holding-usd"></i>

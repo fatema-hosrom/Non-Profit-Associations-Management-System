@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organization;
-use App\Models\OrganizationActivity;
+use App\Models\OrganizationActivity; // sahem activities
 use App\Models\OrganizationEvent;
 
 class PublicController extends Controller
@@ -11,6 +11,7 @@ class PublicController extends Controller
     /**
      * Home page
      */
+
     public function home()
     {
         // Active organizations
@@ -53,7 +54,7 @@ class PublicController extends Controller
     }
 
     /**
-     * عرض جميع الجمعيات
+     * Display all organizations
      */
     public function organizations()
     {
@@ -63,7 +64,7 @@ class PublicController extends Controller
     }
 
     /**
-     * عرض جمعية واحدة مع فعالياتها
+     * Display a single organization with its events
      */
     public function showOrganization($id)
     {
@@ -73,7 +74,7 @@ class PublicController extends Controller
     }
 
     /**
-     * عرض جميع فعاليات ساهم
+     * Display all Sahem activities
      */
     public function sahemActivities()
     {
@@ -87,7 +88,7 @@ class PublicController extends Controller
     }
 
     /**
-     * عرض تفاصيل فعالية ساهم
+     * Display Sahem activity details
      */
     public function showSahemActivity($id)
     {
@@ -101,7 +102,7 @@ class PublicController extends Controller
     }
 
     /**
-     * عرض الفعاليات المنجزة
+     * Display completed activities
      */
     public function completedActivities()
     {
@@ -114,7 +115,7 @@ class PublicController extends Controller
     }
 
     /**
-     * عرض تفاصيل فعالية منجزة
+     * Display completed activity details
      */
     public function showCompletedActivity($id)
     {
@@ -135,14 +136,16 @@ class PublicController extends Controller
 
         return view('public.organizations.events_index', compact('events'));
     }
+
     /**
-     * عرض تفاصيل فعالية جمعية
+     * Display organization event details
      */
     public function showOrganizationEvent($id)
     {
         $event = OrganizationEvent::with('organization')->findOrFail($id);
 
-        // جلب فعاليات أخرى لنفس الجمعية
+        // Fetch other events for the same organization
+        // amazonq-ignore-next-line
         $otherEvents = OrganizationEvent::where('organization_id', $event->organization_id)
             ->where('id', '!=', $event->id)
             ->get();

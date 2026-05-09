@@ -5,7 +5,7 @@
 @section('content')
     <div class="main-content">
         <div class="container mx-auto px-4 py-6">
-            <!-- رسائل النجاح والخطأ -->
+            <!-- Success and Error Messages -->
             @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 flex items-center">
                     <i class="fas fa-check-circle ml-2"></i>
@@ -20,7 +20,7 @@
                 </div>
             @endif
 
-            <!-- رابط العودة -->
+            <!-- Back Link -->
             <div class="mb-6">
                 <a href="{{ route('manager.activity_volunteers.index') }}"
                     class="inline-flex items-center text-blue-600 hover:text-blue-800 transition duration-200">
@@ -188,25 +188,25 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex space-x-2 rtl:space-x-reverse">
-                                            <!-- زر عرض التفاصيل -->
+                                            <!-- View Details Button -->
                                             <button onclick="viewVolunteerDetails({{ $assignment->id }})"
                                                 class="text-blue-600 hover:text-blue-900 transition duration-200">
                                                 <i class="fas fa-eye"></i>
                                             </button>
 
                                             @if ($assignment->status === 'pending')
-                                                <!-- زر الموافقة -->
+                                                <!-- Approve Button -->
                                                 <button onclick="approveVolunteer({{ $assignment->id }})"
                                                     class="text-green-600 hover:text-green-900 transition duration-200">
                                                     <i class="fas fa-check"></i>
                                                 </button>
-                                                <!-- زر الرفض -->
+                                                <!-- Reject Button -->
                                                 <button onclick="rejectVolunteer({{ $assignment->id }})"
                                                     class="text-red-600 hover:text-red-900 transition duration-200">
                                                     <i class="fas fa-times"></i>
                                                 </button>
                                             @elseif($assignment->status === 'approved')
-                                                <!-- زر الإزالة -->
+                                                <!-- Remove Button -->
                                                 <button onclick="removeVolunteer({{ $assignment->id }})"
                                                     class="text-red-600 hover:text-red-900 transition duration-200">
                                                     <i class="fas fa-trash"></i>
@@ -229,7 +229,7 @@
             </div>
         </div>
 
-        <!-- Modal لإضافة متطوع -->
+        <!-- Modal for Adding Volunteer -->
         <div id="assignModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
             <div class="relative top-20 mx-auto  p-5 border w-50 shadow-lg rounded-md bg-white">
                 <div class="mt-3">
@@ -242,7 +242,7 @@
 
                     <form id="assignForm" onsubmit="submitAssignForm(event)">
                         @csrf
-                        <!-- حقل البحث -->
+                        <!-- Search Field -->
                         <div class="mb-4">
                             <label for="volunteerSearchInput" class="block text-sm font-medium text-gray-700 mb-2">بحث عن
                                 متطوع</label>
@@ -274,7 +274,7 @@
             </div>
         </div>
 
-        <!-- Modal لعرض تفاصيل المتطوع -->
+        <!-- Modal for Volunteer Details -->
         <div id="volunteerDetailsModal"
             class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
             <div class="relative top-20 mx-auto p-3 border w-50 shadow-lg rounded-md bg-white">
@@ -287,17 +287,17 @@
                     </div>
 
                     <div id="volunteerDetailsContent">
-                        <!-- سيتم تحميل التفاصيل هنا -->
+                        <!-- Details will be loaded here -->
                     </div>
                 </div>
             </div>
         </div>
 
         <script>
-            // متغيرات عامة
+            // Global variables
             let currentActivityId = {{ $activity->id }};
 
-            // وظائف Modal للإضافة
+            // Add Modal functions
             function openAssignModal() {
                 loadAvailableVolunteers();
                 document.getElementById('assignModal').classList.remove('hidden');
@@ -308,7 +308,7 @@
                 document.getElementById('assignForm').reset();
             }
 
-            // تحميل المتطوعين المتاحين
+            // Load available volunteers
             function loadAvailableVolunteers() {
                 fetch(`{{ route('manager.activity_volunteers.available', $activity->id) }}`)
                     .then(response => response.json())
@@ -336,7 +336,7 @@
                     });
             }
 
-            // إضافة مستمع البحث
+            // Add search listener
             function addSearchListener() {
                 const searchInput = document.getElementById('volunteerSearchInput');
                 const volunteerSelect = document.getElementById('volunteerSelect');
@@ -360,7 +360,7 @@
                 });
             }
 
-            // إرسال نموذج الإضافة
+            // Submit assign form
             function submitAssignForm(event) {
                 event.preventDefault();
 
@@ -394,7 +394,7 @@
                     });
             }
 
-            // الموافقة على المتطوع
+            // Approve volunteer
             function approveVolunteer(assignmentId) {
                 if (!confirm('هل أنت متأكد من الموافقة على هذا المتطوع؟')) return;
 
@@ -422,7 +422,7 @@
                     });
             }
 
-            // رفض المتطوع
+            // Reject volunteer
             function rejectVolunteer(assignmentId) {
                 const reason = prompt('يرجى إدخال سبب الرفض:');
                 if (!reason) return;
@@ -455,7 +455,7 @@
                     });
             }
 
-            // إزالة المتطوع
+            // Remove volunteer
             function removeVolunteer(assignmentId) {
                 const reason = prompt('يرجى إدخال سبب الإزالة:');
                 if (!reason) return;
@@ -488,7 +488,7 @@
                     });
             }
 
-            // عرض تفاصيل المتطوع
+            // View volunteer details
             function viewVolunteerDetails(assignmentId) {
                 fetch(`{{ route('manager.activity_volunteers.details', [$activity->id, ':assignmentId']) }}`.replace(
                         ':assignmentId',
@@ -508,7 +508,7 @@
                 document.getElementById('volunteerDetailsModal').classList.add('hidden');
             }
 
-            // إغلاق الـ Modal عند النقر خارجها
+            // Close Modal when clicking outside
             document.addEventListener('click', function(event) {
                 const assignModal = document.getElementById('assignModal');
                 const volunteerDetailsModal = document.getElementById('volunteerDetailsModal');

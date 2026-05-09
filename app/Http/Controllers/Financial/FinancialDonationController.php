@@ -100,7 +100,7 @@ class FinancialDonationController extends Controller
         return view('html.financial.donations.activity_donations', compact('activity', 'donations', 'totalAmount'));
     }
 
-    // عرض نموذج إضافة تبرع
+    // Display add donation form
     public function createDonation($activityId, Request $request)
     {
         // allow creation if the activity has donation settings and campaign is open
@@ -143,7 +143,7 @@ class FinancialDonationController extends Controller
         DB::transaction(function () use ($validated, $activityId, $managerId) {
             $donorId = $validated['donor_id'];
 
-            // إنشاء متبرع جديد إذا لم يكن موجوداً
+            // Create a new donor if not already existing
             if (!$donorId) {
                 $donor = Donor::create([
                     'name' => $validated['donor_name'],
@@ -154,7 +154,7 @@ class FinancialDonationController extends Controller
                 $donorId = $donor->id;
             }
 
-            // إنشاء التبرع
+            // Create the donation
             Donation::create([
                 'donor_id' => $donorId,
                 'activity_id' => $activityId,
@@ -166,7 +166,7 @@ class FinancialDonationController extends Controller
                 'is_deleted' => false
             ]);
 
-            // تحديث المبلغ المجموع للتبرعات في إعدادات الفعالية
+            // Update the total collected donations amount in activity settings
             $totalCollected = Donation::where('activity_id', $activityId)
                 ->where('is_deleted', false)
                 ->sum('amount');
@@ -179,7 +179,7 @@ class FinancialDonationController extends Controller
             ->with('success', 'تم إضافة التبرع بنجاح');
     }
 
-    // عرض نموذج تعديل تبرع
+    // Display edit donation form
     public function editDonation($activityId, $donationId, Request $request)
     {
         $financial_manager = Auth::guard('financial_manager')->user();
@@ -229,7 +229,7 @@ class FinancialDonationController extends Controller
         DB::transaction(function () use ($validated, $donation, $managerId) {
             $donorId = $validated['donor_id'];
 
-            // إنشاء متبرع جديد إذا لم يكن موجوداً
+            // Create a new donor if not already existing
             if (!$donorId) {
                 $donor = Donor::create([
                     'name' => $validated['donor_name'],
@@ -252,16 +252,16 @@ class FinancialDonationController extends Controller
                 'notes' => $validated['notes'] ?? null,
             ]);
 
-            // إذا تغيّر المبلغ، أنشئ سجل تصحيح
+            // If amount changed, create a correction record
             if ($oldAmount != $validated['amount']) {
                 DonationCorrection::create([
                     'donation_id' => $donation->id,
-                    'reason' => $validated['correction_reason'] ?? 'تعديل المبلغ',
+                    'reason' => $validated['correction_reason'] ?? 'Amount adjustment',
                     'corrected_amount' => $validated['amount'],
                     'correction_date' => now(),
                 ]);
 
-                // أعد حساب المجموع الكلي للتبرعات بعد التعديل
+                // Recalculate total donations after update
                 $totalCollected = Donation::where('activity_id', $donation->activity_id)
                     ->where('is_deleted', false)
                     ->sum('amount');
@@ -275,7 +275,7 @@ class FinancialDonationController extends Controller
             ->with('success', 'تم تحديث التبرع بنجاح');
     }
 
-    // حذف تبرع (معلق - غير ظاهر في الواجهة)
+    // Delete donation (suspended - not visible in UI)
     // public function destroyDonation($activityId, $donationId, Request $request)
     // {
     //     $managerId = $request->session()->get('financial_manager_id');
@@ -296,6 +296,6 @@ class FinancialDonationController extends Controller
     //     ]);
     //
     //     return redirect()->route('financial.donations.activity.show', $activityId)
-    //         ->with('success', 'تم حذف التبرع بنجاح');
+    //         ->with('success', 'Donation deleted successfully');
     // }
 }

@@ -4,18 +4,18 @@
 
 @section('content')
 
-{{-- عغاا --}}
-    <!-- إحصائيات ساهم -->
+{{-- placeholder --}}
+    <!-- Sahem Statistics -->
     <section class="py-16 bg-gradient-to-r from-indigo-900 to-indigo-700 text-white">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <!-- إجمالي الفعاليات -->
+            <!-- Total Activities -->
             <div
                 class="bg-indigo-800 rounded-xl p-8 shadow-lg transform hover:scale-105 transition flex flex-col items-center">
                 <i class="fas fa-calendar-check fa-3x mb-3"></i>
                 <h3 class="text-4xl font-bold">{{ $sahemActivities->count() }}</h3>
                 <p class="text-lg mt-2 font-semibold">عدد فعاليات ساهم</p>
             </div>
-            <!-- إجمالي التبرعات -->
+            <!-- Total Donations -->
             <div
                 class="bg-indigo-800 rounded-xl p-8 shadow-lg transform hover:scale-105 transition flex flex-col items-center">
                 @php
@@ -25,7 +25,7 @@
                 <h3 class="text-4xl font-bold">{{ number_format($totalDonations, 2) }} $</h3>
                 <p class="text-lg mt-2 font-semibold">إجمالي التبرعات</p>
             </div>
-            <!-- إجمالي المتطوعين -->
+            <!-- Total Volunteers -->
             <div
                 class="bg-indigo-800 rounded-xl p-8 shadow-lg transform hover:scale-105 transition flex flex-col items-center">
                 @php
@@ -40,7 +40,7 @@
         </div>
     </section>
 
-    <!-- قسم تبرع الآن -->
+    <!-- Donate Now Section -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 text-center mb-8">
             <h2 class="text-4xl font-bold text-indigo-900 mb-3">تبرع الآن</h2>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="relative max-w-7xl mx-auto px-4">
-            <!-- أسهم التنقل -->
+            <!-- Navigation Arrows -->
             <button id="donation-prev"
                 class="absolute top-1/2 -translate-y-1/2 left-0 z-10 bg-indigo-700 text-white rounded-full p-3 hover:bg-indigo-600 transition">
                 <i class="fas fa-chevron-right"></i>
@@ -77,12 +77,12 @@
         </div>
     </section>
 
-    <!-- فعاليات التطوع -->
+    <!-- Volunteer Activities -->
     <section class="py-16 bg-gray-100">
         <h2 class="text-4xl font-bold text-center mb-8 text-indigo-900">فعاليات التطوع</h2>
 
         <div class="relative max-w-7xl mx-auto px-4">
-            <!-- أسهم التنقل -->
+            <!-- Navigation Arrows -->
             <button id="volunteer-prev"
                 class="absolute top-1/2 -translate-y-1/2 left-0 z-10 bg-indigo-700 text-white rounded-full p-3 hover:bg-indigo-600 transition">
                 <i class="fas fa-chevron-right"></i>
@@ -121,7 +121,7 @@
             </p>
         </div>
 
-        <!-- الإحصائيات -->
+        <!-- Statistics -->
         <div class="stats-grid mb-12">
             <div>
                 <h3 class="text-indigo-700">{{ $orgStats['organizations'] }}</h3>
@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        <!-- شريط الشعارات الدائري -->
+        <!-- Circular Logo Strip -->
         <div class="logo-wheel-wrapper">
             <div class="logo-wheel" id="logoWheel">
                 @foreach ($organizations as $org)
@@ -151,7 +151,7 @@
 
 
 
-    <!-- قسم "انضم إلينا" -->
+    <!-- Join Us Section -->
     <section class="py-20 bg-yellow-400 text-gray-900 text-center rounded-xl mx-4 md:mx-16 mt-20 shadow-lg">
         <h2 class="text-4xl font-bold mb-4">انضم وكن جزءًا من التغيير!</h2>
         <p class="text-lg mb-6">شارك معنا في فعاليات التطوع أو ساهم في التبرعات لتغيير حياة الناس</p>
@@ -167,7 +167,7 @@
 
     @push('scripts')
         <script>
-            // شريط التبرع
+            // Donation carousel
             const donationCarousel = document.getElementById('donation-carousel');
             document.getElementById('donation-prev').addEventListener('click', () => {
                 donationCarousel.scrollBy({
@@ -182,7 +182,7 @@
                 });
             });
 
-            // شريط التطوع
+            // Volunteer carousel
             const volunteerCarousel = document.getElementById('volunteer-carousel');
             document.getElementById('volunteer-prev').addEventListener('click', () => {
                 volunteerCarousel.scrollBy({
@@ -201,7 +201,7 @@
             document.addEventListener('DOMContentLoaded', () => {
                 const wheel = document.getElementById('logoWheel');
                 let offset = 0;
-                const speed = 0.4; // سرعة الحركة
+                const speed = 0.4; // movement speed
                 let paused = false;
 
                 function animate() {
@@ -213,7 +213,7 @@
                         if (firstItem) {
                             const itemWidth = firstItem.offsetWidth + 24;
 
-                            // إذا خرج العنصر كليًا من اليسار
+                            // If item fully exits from the left
                             if (-offset >= itemWidth) {
                                 wheel.appendChild(firstItem);
                                 offset += itemWidth;

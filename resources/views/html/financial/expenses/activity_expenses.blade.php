@@ -9,7 +9,7 @@
 @section('content')
     <div class="container mx-auto px-4 py-6">
 
-        {{-- العنوان --}}
+        {{-- Title --}}
         <h1 class="text-2xl font-bold mb-6 flex items-center gap-2 text-blue-700">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -18,7 +18,7 @@
             مصروفات الفعالية: {{ $activity->title }}
         </h1>
 
-        {{-- إضافة مصروف + فلتر البحث --}}
+        {{-- Add Expense + Search Filter --}}
         <div class="mb-6 flex flex-wrap justify-between gap-2 items-center">
 
             <form method="GET" class="flex gap-2 flex-1 min-w-[200px]">
@@ -50,7 +50,7 @@
 
         </div>
 
-        {{-- الجدول --}}
+        {{-- Table --}}
         <div class="bg-white rounded-xl shadow overflow-hidden border">
             <table class="w-full table-fixed">
                 <thead>
@@ -100,7 +100,7 @@
                                 @endif
                             </td>
                             <td class="px-4 py-3 flex justify-center gap-3">
-                                {{-- تعديل --}}
+                                {{-- Edit --}}
                                 <a href="{{ route('financial.expenses.activity.edit', [$activity->id, $exp->id]) }}"
                                     class="flex items-center gap-1 text-yellow-600 hover:text-yellow-800">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,7 +125,7 @@
         {{-- Pagination --}}
         <div class="mt-4">{{ $expenses->links() }}</div>
 
-        {{-- مجموع المصاريف --}}
+        {{-- Total Expenses --}}
         <div class="mt-2 text-right">
             مجموع المصاريف: <strong class="text-green-700">{{ number_format($totalAmount, 2) }}</strong>
         </div>

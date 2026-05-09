@@ -29,13 +29,13 @@ class ActivityController extends Controller
 
 
 
-    // عرض قائمة الفعاليات التي أنشأها المدير الحالي
+    // Display list of activities created by the current manager
     public function getActivities(Request $request)
     {
         $manager = Auth::guard('manager')->user();
         $query = OrganizationActivity::where('manager_id', $manager->id);
 
-        // بحث حسب العنوان أو الوصف
+        // Search by title or description
         if ($request->has('search') && $request->search !== '') {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -51,7 +51,7 @@ class ActivityController extends Controller
 
 
 
-    // عرض تفاصيل فعالية معينة
+    // Display details of a specific activity
     public function viewActivity($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -64,17 +64,16 @@ class ActivityController extends Controller
 
 
 
-    // إضافة فعالية جديدة
+    // Add a new activity
 
-
-    // عرض نموذج إضافة فعالية (GET)
+    // Display add activity form (GET)
     public function addActivity()
     {
 
         return view('html.manager.activities.add_activity');
     }
 
-    // معالجة إضافة فعالية (POST)
+    // Handle add activity (POST)
     public function storeActivity(Request $request)
     {
         $manager = Auth::guard('manager')->user();
@@ -90,7 +89,7 @@ class ActivityController extends Controller
         ]);
 
         try {
-            // رفع الصورة
+            // Upload image
             if ($request->hasFile('image')) {
                 $imagename = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
                 $request->file('image')->move(public_path('assets/images/activities'), $imagename);
@@ -101,7 +100,7 @@ class ActivityController extends Controller
 
             $activity = OrganizationActivity::create($data);
 
-            // إنشاء السجلات الفرعية حسب النوع
+            // Create sub-records based on activity type
             if ($data['activity_type'] === 'donation' || $data['activity_type'] === 'both') {
                 ActivityDonationSettings::create([
                     'activity_id' => $activity->id,
@@ -132,8 +131,8 @@ class ActivityController extends Controller
 
 
 
-    // تعديل فعالية موجودة
-    // عرض نموذج تعديل فعالية (GET)
+    // Edit an existing activity
+    // Display edit activity form (GET)
     public function editActivity($id, Request $request)
     {
         $manager = Auth::guard('manager')->user();
@@ -144,7 +143,7 @@ class ActivityController extends Controller
         return view('html.manager.activities.edit_activity', compact('activity'));
     }
 
-    // معالجة تحديث فعالية (PUT)
+    // Handle activity update (PUT)
     public function updateActivity(Request $request, $id)
     {
         $manager = Auth::guard('manager')->user();
@@ -162,7 +161,7 @@ class ActivityController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
-        // تحديث الصورة
+        // Update image
         if ($request->hasFile('image')) {
             $imagename = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path('assets/images/activities'), $imagename);
@@ -176,7 +175,7 @@ class ActivityController extends Controller
 
             $activity->update($data);
 
-            // تحديث أو حذف السجلات الفرعية
+            // Update or delete sub-records
             if ($data['activity_type'] === 'donation') {
                 $activity->volunteerRequirements()?->delete();
                 $activity->donationSettings()->updateOrCreate(
@@ -227,19 +226,19 @@ class ActivityController extends Controller
 
 
 
-    // حذف فعالية (DELETE)
+    // Delete activity (DELETE)
     public function destroyActivity($id)
     {
-        // هذا يمنع المدير من حذف فعاليات أنشأها مديرون آخرون
+        // This prevents the manager from deleting activities created by other managers
         $manager = Auth::guard('manager')->user();
         $activity = OrganizationActivity::where('id', $id)
             ->where('manager_id', $manager->id)
             ->firstOrFail();
-        // حذف ملف الصورة المرتبط بالفعالية إذا كان موجودًا
+        // Delete the image file associated with the activity if it exists
         if ($activity->image) {
             $imagePath = public_path('assets/images/activities/' . $activity->image);
             if (file_exists($imagePath)) {
-                unlink($imagePath); // حذف الملف من النظام
+                unlink($imagePath); // Delete the file from the filesystem
             }
         }
         $activity->delete();
@@ -249,12 +248,12 @@ class ActivityController extends Controller
 
 
 
-    //  تبديل حالة النشر للفعالية
+    // Toggle activity publish status
     public function togglePublish($id)
     {
         $activity = OrganizationActivity::findOrFail($id);
 
-        // إذا كان null أو false → نجعله true
+        // If null or false → set to true
         $activity->is_published = $activity->is_published ? false : true;
         $activity->save();
 
@@ -262,7 +261,7 @@ class ActivityController extends Controller
             ->with('success', $activity->is_published ? 'تم إعلان الفعالية' : 'تم إيقاف الإعلان عن الفعالية');
     }
 
-    // تغيير حالة الفعالية
+    // Change activity status
     public function toggleStatus($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -270,7 +269,7 @@ class ActivityController extends Controller
             ->where('manager_id', $manager->id)
             ->firstOrFail();
 
-        // تحديد الحالة التالية في الدورة
+        // Determine the next status in the cycle
         $currentStatus = $activity->status;
         $nextStatus = match ($currentStatus) {
             'draft' => 'active',
@@ -282,18 +281,18 @@ class ActivityController extends Controller
         $activity->status = $nextStatus;
         $activity->save();
 
-        // رسائل النجاح بالعربية
+        // Status labels
         $statusMessages = [
-            'draft' => 'مسودة',
-            'active' => 'نشطة',
-            'closed' => 'مغلقة'
+            'draft' => 'Draft',
+            'active' => 'Active',
+            'closed' => 'Closed'
         ];
 
         return redirect()->route('manager.activities.index')
-            ->with('success', 'تم تغيير حالة الفعالية إلى: ' . $statusMessages[$nextStatus]);
+            ->with('success', 'Activity status changed to: ' . $statusMessages[$nextStatus]);
     }
 
-    // تغيير حالة الفعالية
+    // Change activity status
     public function changeStatus(Request $request, $id)
     {
         $manager = Auth::guard('manager')->user();
@@ -309,20 +308,20 @@ class ActivityController extends Controller
         $activity->status = $newStatus;
         $activity->save();
 
-        // رسائل النجاح بالعربية
+        // Status labels
         $statusMessages = [
-            'draft' => 'مسودة',
-            'active' => 'نشطة',
-            'closed' => 'مغلقة'
+            'draft' => 'Draft',
+            'active' => 'Active',
+            'closed' => 'Closed'
         ];
 
         return redirect()->route('manager.activities.index')
-            ->with('success', 'تم تغيير حالة الفعالية إلى: ' . $statusMessages[$newStatus]);
+            ->with('success', 'Activity status changed to: ' . $statusMessages[$newStatus]);
     }
 
-    // نتائج الفعاليات
+    // Activity results
 
-    // إدارة نتائج الفعالية (عرض وإضافة وتعديل في صفحة واحدة)
+    // Manage activity results (view, add, and edit in one page)
     public function manageActivityResults($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -332,16 +331,16 @@ class ActivityController extends Controller
 
         $results = ActivityResult::where('activity_id', $id)->first();
 
-        // إذا كانت هناك نتائج، عرض صفحة التعديل
+        // If results exist, show the edit page
         if ($results) {
             return view('html.manager.activities.edit_results', compact('activity', 'results'));
         }
 
-        // إذا لم تكن هناك نتائج، عرض صفحة الإضافة
+        // If no results exist, show the add page
         return view('html.manager.activities.add_results', compact('activity'));
     }
 
-    // عرض نموذج إضافة نتائج الفعالية
+    // Display add activity results form
     public function addActivityResults($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -352,7 +351,7 @@ class ActivityController extends Controller
         return view('html.manager.activities.add_results', compact('activity'));
     }
 
-    // حفظ نتائج الفعالية
+    // Save activity results
     public function storeActivityResults(Request $request, $id)
     {
         $manager = Auth::guard('manager')->user();
@@ -373,7 +372,7 @@ class ActivityController extends Controller
         ]);
 
         try {
-            // رفع الصور
+            // Upload images
             $imageNames = [];
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
@@ -386,7 +385,7 @@ class ActivityController extends Controller
             }
             $data['images'] = implode("\n", $imageNames);
 
-            // رفع ملف التقرير
+            // Upload report file
             if ($request->hasFile('report_file')) {
                 $fileName = uniqid() . '.' . $request->file('report_file')->getClientOriginalExtension();
                 $request->file('report_file')->move(public_path('assets/files/activity_reports'), $fileName);
@@ -404,7 +403,7 @@ class ActivityController extends Controller
         }
     }
 
-    // عرض نموذج تعديل نتائج الفعالية
+    // Display edit activity results form
     public function editActivityResults($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -417,7 +416,7 @@ class ActivityController extends Controller
         return view('html.manager.activities.edit_results', compact('activity', 'results'));
     }
 
-    // تحديث نتائج الفعالية
+    // Update activity results
     public function updateActivityResults(Request $request, $id)
     {
         $manager = Auth::guard('manager')->user();
@@ -440,9 +439,9 @@ class ActivityController extends Controller
         ]);
 
         try {
-            // رفع الصور الجديدة
+            // Upload new images
             if ($request->hasFile('images')) {
-                // حذف الصور القديمة
+                // Delete old images
                 if ($results->images) {
                     $oldImages = explode("\n", $results->images);
                     foreach ($oldImages as $oldImage) {
@@ -462,9 +461,9 @@ class ActivityController extends Controller
                 $data['images'] = implode("\n", $imageNames);
             }
 
-            // رفع ملف التقرير الجديد
+            // Upload new report file
             if ($request->hasFile('report_file')) {
-                // حذف الملف القديم
+                // Delete old file
                 if ($results->report_file) {
                     $oldPath = public_path('assets/files/activity_reports/' . $results->report_file);
                     if (file_exists($oldPath)) unlink($oldPath);
@@ -483,7 +482,7 @@ class ActivityController extends Controller
         }
     }
 
-    // حذف نتائج الفعالية
+    // Delete activity results
     public function destroyActivityResults($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -493,7 +492,7 @@ class ActivityController extends Controller
 
         $results = ActivityResult::where('activity_id', $id)->firstOrFail();
 
-        // حذف ملفات الصور والفيديوهات
+        // Delete image and video files
         if ($results->images) {
             $files = json_decode($results->images, true);
             if ($files) {
@@ -504,7 +503,7 @@ class ActivityController extends Controller
             }
         }
 
-        // حذف ملف التقرير
+        // Delete report file
         if ($results->report_file) {
             $filePath = public_path('assets/files/activity_reports/' . $results->report_file);
             if (file_exists($filePath)) unlink($filePath);

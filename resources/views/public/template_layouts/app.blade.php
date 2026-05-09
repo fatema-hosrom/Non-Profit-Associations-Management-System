@@ -22,7 +22,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
 
-                {{-- الشعار --}}
+                {{-- Logo --}} 
                 <a href="{{ route('public.home') }}" class="flex items-center gap-2 flex-shrink-0">
                     <img src="/assets/images/logos/logo.png" alt="شعار ساهم"
                          class="h-14 w-auto transition-transform duration-300 hover:scale-105">
@@ -31,7 +31,7 @@
                     </span>
                 </a>
 
-                {{-- روابط الديسكتوب --}}
+                {{-- Desktop Links --}}
                 <nav class="hidden lg:flex items-center gap-1">
                     <a href="{{ route('public.home') }}"
                        class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200
@@ -54,10 +54,10 @@
                         فعاليات ساهم
                     </a>
 
-                    {{-- فاصل --}}
+                    {{-- Separator --}}
                     <div class="w-px h-5 bg-white/15 mx-1"></div>
 
-                    {{-- رابط الفعاليات المنجزة --}}
+                    {{-- Completed Activities Link --}}
                     <a href="{{ route('public.completed-activities') }}"
                        class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200
                               {{ Request::routeIs('public.completed-activities') ? 'text-yellow-400 bg-white/10' : 'text-gray-300 hover:text-white hover:bg-white/10' }} flex items-center gap-1.5">
@@ -66,7 +66,7 @@
                     </a>
                 </nav>
 
-                {{-- أزرار المستخدم --}}
+                {{-- User Buttons --}}
                 <div class="hidden lg:flex items-center gap-3">
                     @php $volunteer = Auth::guard('volunteer')->user(); @endphp
 
@@ -105,14 +105,14 @@
                     @endif
                 </div>
 
-                {{-- زر الهامبرغر --}}
+                {{-- Hamburger Button --}}
                 <button id="mobile-toggle"
                         class="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition focus:outline-none">
                     <i id="hamburger-icon" class="fas fa-bars text-xl"></i>
                 </button>
             </div>
 
-            {{-- قائمة الموبايل --}}
+            {{-- Mobile Menu --}}
             <div id="mobile-menu" class="lg:hidden hidden border-t border-white/10 pb-4 pt-3">
                 <nav class="flex flex-col gap-1">
                     <a href="{{ route('public.home') }}"
@@ -143,7 +143,7 @@
                     </span>
                 </nav>
 
-                {{-- أزرار المتطوع في الموبايل --}}
+                {{-- Volunteer Buttons in Mobile --}}
                 <div class="pt-4 mt-3 border-t border-white/10 px-1">
                     @if ($volunteer)
                         <div class="flex items-center justify-between bg-white/8 rounded-xl px-4 py-3
@@ -319,11 +319,11 @@
     {{-- ===== FOOTER ===== --}}
     <footer class="bg-[#2c3e50] text-white mt-10">
 
-        {{-- القسم الرئيسي --}}
+        {{-- Main Section --}}
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
-                {{-- العمود 1: الشعار والإحصائيات --}}
+                {{-- Column 1: Logo and Statistics --}}
                 <div class="sm:col-span-2 lg:col-span-1">
                     <a href="{{ route('public.home') }}" class="flex items-center gap-3 mb-4">
                         <img src="/assets/images/logos/logo.png" alt="شعار ساهم" class="h-14 w-auto">
@@ -333,7 +333,7 @@
                         منصة ساهم لدعم الجمعيات والفعاليات الإنسانية وتسهيل المشاركة التطوعية في المجتمع.
                     </p>
 
-                    {{-- إحصائيات --}}
+                    {{-- Statistics --}}
                     <div class="flex gap-4 mb-6">
                         <div class="text-center">
                             <div class="text-2xl font-black text-yellow-400">+1200</div>
@@ -351,7 +351,7 @@
                         </div>
                     </div>
 
-                    {{-- سوشيال ميديا --}}
+                    {{-- Social Media --}}
                     <div class="flex gap-2">
                         <a href="#" title="Twitter"
                            class="w-9 h-9 rounded-lg bg-white/8 border border-white/12 flex items-center justify-center
@@ -380,7 +380,7 @@
                     </div>
                 </div>
 
-                {{-- العمود 2: روابط سريعة --}}
+                {{-- Column 2: Quick Links --}}
                 <div>
                     <h4 class="text-white font-bold text-sm mb-4 pb-3 border-b border-white/10">
                         روابط سريعة
@@ -413,7 +413,7 @@
                     </nav>
                 </div>
 
-                {{-- العمود 3: عن المنصة --}}
+                {{-- Column 3: About Platform --}}
                 <div>
                     <h4 class="text-white font-bold text-sm mb-4 pb-3 border-b border-white/10">
                         عن المنصة
@@ -443,7 +443,7 @@
                     </a>
                 </div>
 
-                {{-- العمود 4: تواصل + نشرة --}}
+                {{-- Column 4: Contact + Newsletter --}}
                 <div>
                     <h4 class="text-white font-bold text-sm mb-4 pb-3 border-b border-white/10">
                         تواصل معنا
@@ -465,7 +465,7 @@
                         </span>
                     </div>
 
-                    {{-- نشرة بريدية --}}
+                    {{-- Newsletter --}}
                     <div class="bg-white/5 border border-white/10 rounded-xl p-4">
                         <p class="text-gray-400 text-xs font-semibold mb-3">
                             <i class="fas fa-bell ml-1 text-yellow-400"></i>
@@ -487,7 +487,7 @@
             </div>
         </div>
 
-        {{-- الشريط السفلي --}}
+        {{-- Bottom Bar --}}
         <div class="border-t border-white/8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5
                         flex flex-col sm:flex-row items-center justify-between gap-3">

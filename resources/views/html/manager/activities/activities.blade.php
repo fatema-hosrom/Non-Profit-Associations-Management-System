@@ -40,7 +40,7 @@
                 </div>
             @endif
 
-            <!-- حقل البحث -->
+            <!-- Search Field -->
             <div class="row mb-4">
                 <div class="col-12">
                     <form method="GET" action="{{ route('manager.activities.index') }}" class="d-flex">
@@ -134,7 +134,7 @@
                                     <i class="fas fa-trash"></i> حذف
                                 </button>
 
-                                {{-- قائمة منسدلة تغيير حالة الفعالية --}}
+                                {{-- Activity Status Dropdown --}}
                                 <div class="dropdown" style="display:inline-block;">
                                     <button class="btn action-btn status-btn dropdown-toggle"
                                         style="background-color: #f5cf27; color: white; border: none;" type="button"
@@ -199,7 +199,7 @@
                     </div>
                 </div>
 
-                {{-- Modal حذف الفعالية --}}
+                {{-- Activity Delete Modal --}}
                 <div class="modal fade" id="deleteModal{{ $activity['id'] }}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">

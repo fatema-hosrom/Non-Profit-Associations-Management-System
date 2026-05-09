@@ -5,7 +5,7 @@
 @section('content')
     <div class="container mx-auto px-4 py-6">
 
-        {{-- العنوان --}}
+        {{-- Title --}}
         <h1 class="text-2xl font-bold mb-6 flex items-center gap-2 text-blue-700">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5h2m-1 0v14m-4-4h8" />
@@ -14,7 +14,7 @@
         </h1>
 
 
-        {{-- فلتر البحث --}}
+        {{-- Search Filter --}}
         <form method="GET" class="mb-6 flex flex-wrap gap-2">
 
             <div class="relative flex-1">
@@ -65,7 +65,7 @@
 
 
 
-        {{-- الجدول --}}
+        {{-- Table --}}
         <div class="bg-white rounded-xl shadow overflow-hidden border">
 
             <table class="w-full table-fixed">
@@ -124,7 +124,7 @@ px-2 py-1 rounded-full font-semibold">
 
                             <td class="px-4 py-3 flex justify-center gap-3">
 
-                                {{-- عرض التبرعات --}}
+                                {{-- View Donations --}}
                                 <a href="{{ route('financial.donations.activity.show', $act->id) }}"
                                     class="flex items-center gap-1 text-blue-600 hover:text-blue-800">
 
@@ -147,7 +147,7 @@ px-2 py-1 rounded-full font-semibold">
                                 </a>
 
 
-                                {{-- إضافة تبرع --}}
+                                {{-- Add Donation --}}
                                 <a href="{{ route('financial.donations.activity.create', $act->id) }}"
                                     class="flex items-center gap-1 text-green-600 hover:text-green-800">
 

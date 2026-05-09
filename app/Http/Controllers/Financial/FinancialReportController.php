@@ -57,7 +57,7 @@ class FinancialReportController extends Controller
                 ];
             });
 
-        // أفضل 5 فعاليات من حيث التبرعات
+        // Top 5 activities by donations
         $topActivities = OrganizationActivity::with(['donations' => function ($q) {
             $q->where('is_deleted', false);
         }])
@@ -83,14 +83,14 @@ class FinancialReportController extends Controller
         ));
     }
 
-    // تقرير تفصيلي للفعاليات
+    // Detailed activities report
     public function activitiesReport(Request $request)
     {
         $query = OrganizationActivity::with(['donations' => function ($q) {
             $q->where('is_deleted', false);
         }, 'expenses']);
 
-        // فلترة حسب التاريخ
+        // Filter by date
         if ($request->has('start_date') && $request->start_date) {
             $query->where('created_at', '>=', $request->start_date);
         }
@@ -115,13 +115,13 @@ class FinancialReportController extends Controller
         return view('html.financial.reports.activities', compact('activities'));
     }
 
-    // تقرير التبرعات التفصيلي
+    // Detailed donations report
     public function donationsReport(Request $request)
     {
         $query = Donation::with(['donor', 'activity'])
             ->where('is_deleted', false);
 
-        // فلترة حسب التاريخ
+        // Filter by date
         if ($request->has('start_date') && $request->start_date) {
             $query->where('date', '>=', $request->start_date);
         }
@@ -130,26 +130,26 @@ class FinancialReportController extends Controller
             $query->where('date', '<=', $request->end_date);
         }
 
-        // فلترة حسب نوع التبرع
+        // Filter by donation type
         if ($request->has('type') && $request->type) {
             $query->where('donation_type', $request->type);
         }
 
         $donations = $query->orderBy('date', 'desc')->paginate(25);
 
-        // إحصائيات إضافية
+        // Additional statistics
         $totalAmount = $query->sum('amount');
         $donationsCount = $query->count();
 
         return view('html.financial.reports.donations', compact('donations', 'totalAmount', 'donationsCount'));
     }
 
-    // تقرير المصاريف التفصيلي
+    // Detailed expenses report
     public function expensesReport(Request $request)
     {
         $query = Expense::with(['activity']);
 
-        // فلترة حسب التاريخ
+        // Filter by date
         if ($request->has('start_date') && $request->start_date) {
             $query->where('expense_date', '>=', $request->start_date);
         }
@@ -160,7 +160,7 @@ class FinancialReportController extends Controller
 
         $expenses = $query->orderBy('expense_date', 'desc')->paginate(25);
 
-        // إحصائيات إضافية
+        // Additional statistics
         $totalAmount = $query->sum('amount');
         $expensesCount = $query->count();
 

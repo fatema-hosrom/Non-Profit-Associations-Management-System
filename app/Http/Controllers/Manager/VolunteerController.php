@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class VolunteerController extends Controller
 {
-    // عرض قائمة المتطوعين
+    // Display the list of volunteers
     public function getVolunteers(Request $request)
     {
         $query = Volunteer::query();
 
-        // بحث حسب الاسم أو البريد
+        // Search by name or email
         if ($request->has('search') && $request->search !== '') {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -30,7 +30,7 @@ class VolunteerController extends Controller
         return view('html.manager.volunteers.volunteers', compact('volunteers'));
     }
 
-    // عرض نموذج إضافة متطوع جديد
+    // Show the form to add a new volunteer
     public function addVolunteer()
     {
         $countries = json_decode(file_get_contents(public_path('data/countries_ar.json')), true);
@@ -39,7 +39,7 @@ class VolunteerController extends Controller
         return view('html.manager.volunteers.add_volunteer', compact('countries', 'languages'));
     }
 
-    // حفظ متطوع جديد
+    // Save a new volunteer
     public function storeVolunteer(Request $request)
     {
         $data = $request->validate([
@@ -61,32 +61,32 @@ class VolunteerController extends Controller
             'emergency_contact' => 'nullable|string',
         ]);
 
-        // التحقق من البريد الإلكتروني
+        // Check if email already exists
         if (Volunteer::where('email', $request->email)->exists()) {
-            return back()->withInput()->withErrors(['error' => 'هذا البريد الإلكتروني مسجل مسبقًا.']);
+            return back()->withInput()->withErrors(['error' => 'This email address is already registered.']);
         }
 
-        // التحقق من رقم الهاتف
+        // Check if phone number already exists
         if (Volunteer::where('phone', $request->phone)->exists()) {
-            return back()->withInput()->withErrors(['error' => 'رقم الهاتف مستخدم مسبقًا.']);
+            return back()->withInput()->withErrors(['error' => 'This phone number is already in use.']);
         }
 
-        // تحويل اللغات إلى نص
+        // Convert languages to text
         $data['languages'] = $request->languages ? implode(',', $request->languages) : null;
 
-        // تشفير كلمة المرور
+        // Encrypt password
         $data['password'] = bcrypt($data['password']);
 
-        // الحالة الافتراضية
+        // Default status
         $data['status'] = 'active';
 
-        // حفظ المتطوع
+        // Save volunteer
         Volunteer::create($data);
 
         return redirect()->route('manager.volunteers.index')->with('success', 'تم إضافة المتطوع بنجاح');
     }
 
-    // عرض تفاصيل متطوع
+    // Display volunteer details
     public function viewVolunteer($id)
     {
         $volunteer = Volunteer::findOrFail($id);
@@ -94,7 +94,7 @@ class VolunteerController extends Controller
         return view('html.manager.volunteers.view_volunteer', compact('volunteer'));
     }
 
-    // عرض نموذج تعديل متطوع
+    // Display edit volunteer form
     public function editVolunteer($id)
     {
         $volunteer = Volunteer::findOrFail($id);
@@ -104,7 +104,7 @@ class VolunteerController extends Controller
         return view('html.manager.volunteers.edit_volunteer', compact('volunteer', 'countries', 'languages'));
     }
 
-    // تحديث بيانات متطوع
+    // Update volunteer data
     public function updateVolunteer(Request $request, $id)
     {
         $volunteer = Volunteer::findOrFail($id);
@@ -127,17 +127,17 @@ class VolunteerController extends Controller
             'emergency_contact' => 'nullable|string',
         ]);
 
-        // التحقق من البريد الإلكتروني
+        // Check if email already exists
         if (Volunteer::where('email', $request->email)->where('id', '!=', $volunteer->id)->exists()) {
-            return back()->withInput()->withErrors(['error' => 'هذا البريد الإلكتروني مسجل مسبقًا.']);
+            return back()->withInput()->withErrors(['error' => 'This email address is already registered.']);
         }
 
-        // التحقق من رقم الهاتف
+        // Check if phone number already exists
         if (Volunteer::where('phone', $request->phone)->where('id', '!=', $volunteer->id)->exists()) {
-            return back()->withInput()->withErrors(['error' => 'رقم الهاتف مستخدم مسبقًا.']);
+            return back()->withInput()->withErrors(['error' => 'This phone number is already in use.']);
         }
 
-        // تحويل اللغات إلى نص
+        // Convert languages to text
         $data['languages'] = $request->languages ? implode(',', $request->languages) : null;
 
         $volunteer->update($data);
@@ -145,7 +145,7 @@ class VolunteerController extends Controller
         return redirect()->route('manager.volunteers.index')->with('success', 'تم تحديث بيانات المتطوع بنجاح');
     }
 
-    // حذف متطوع
+    // Delete a volunteer
     public function destroyVolunteer($id)
     {
         $volunteer = Volunteer::findOrFail($id);

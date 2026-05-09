@@ -145,7 +145,7 @@
         color: white;
     }
 
-    /* فقط عنصر الـ layout — تجنب تكرار الهامش عند وجود .main-content داخل الصفحة */
+    /* Layout element only — avoid repeating margin when .main-content exists inside the page */
     main.main-content {
         margin-right: 280px;
         padding: 16px;

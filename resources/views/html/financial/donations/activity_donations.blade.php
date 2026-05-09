@@ -5,7 +5,7 @@
 @section('content')
     <div class="container mx-auto px-4 py-6">
 
-        {{-- العنوان --}}
+        {{-- Title --}}
         <h1 class="text-2xl font-bold mb-6 flex items-center gap-2 text-blue-700">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2
@@ -17,7 +17,7 @@
         </h1>
 
 
-        {{-- زر الإضافة --}}
+        {{-- Add Button --}}
         <div class="mb-6">
             <a href="{{ route('financial.donations.activity.create', $activity->id) }}"
                 class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2 w-fit">
@@ -31,7 +31,7 @@
         </div>
 
 
-        {{-- فلتر البحث --}}
+        {{-- Search Filter --}}
         <form method="GET" class="mb-6 flex flex-wrap gap-2 items-center">
 
             <div class="relative flex-1">
@@ -90,7 +90,7 @@
         </form>
 
 
-        {{-- الجدول --}}
+        {{-- Table --}}
         <div class="bg-white rounded-lg shadow overflow-hidden">
 
             <table class="w-full table-auto border-collapse">
@@ -197,7 +197,7 @@
         </div>
 
 
-        {{-- مجموع التبرعات --}}
+        {{-- Total Donations --}}
         <div class="mt-4 flex items-center gap-2 text-lg">
 
             <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">

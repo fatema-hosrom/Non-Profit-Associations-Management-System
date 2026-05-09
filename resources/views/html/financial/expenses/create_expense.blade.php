@@ -180,28 +180,28 @@
             addForm.submit();
         });
 
-        // إغلاق Modal عند الضغط على الخلفية
+        // Close Modal when clicking backdrop
         addModal.addEventListener('click', function(e) {
             if (e.target === this || e.target.classList.contains('add-confirm-backdrop')) {
                 closeAddConfirm();
             }
         });
 
-        // إغلاق باستخدام مفتاح Escape
+        // Close using Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && addModal.classList.contains('show')) {
                 closeAddConfirm();
             }
         });
 
-        // فتح حقل الملف عند النقر على الـ div
+        // Open file input when clicking the div
         document.querySelector('.file-upload').addEventListener('click', function(e) {
             if (e.target.tagName !== 'INPUT') {
                 document.getElementById('receipt').click();
             }
         });
 
-        // عرض اسم الملف المختار
+        // Show selected file name
         document.getElementById('receipt').addEventListener('change', function(e) {
             const fileName = e.target.files[0] ? e.target.files[0].name : '';
             document.getElementById('file-name').textContent = fileName ? 'تم اختيار: ' + fileName : '';

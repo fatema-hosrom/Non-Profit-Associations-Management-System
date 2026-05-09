@@ -29,7 +29,7 @@ class SupervisorVolunteerController extends Controller
         return view('html.supervisor.volunteers.index', compact('volunteers', 'counts'));
     }
 
-    // عرض تفاصيل طلب التطوع
+    // Display volunteer request details
 
     public function show($id)
     {

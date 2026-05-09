@@ -8,7 +8,7 @@
 
         <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-8">
 
-            {{-- العنوان --}}
+            {{-- Title --}}
             <div class="flex items-center justify-between mb-6 border-b pb-4">
                 <h1 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -19,7 +19,7 @@
             </div>
 
 
-            {{-- الأخطاء --}}
+            {{-- Errors --}}
             @if ($errors->any())
                 <div class="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
                     <ul class="list-disc pl-5">
@@ -38,7 +38,7 @@
                 @method('PUT')
 
 
-                {{-- بيانات التبرع --}}
+                {{-- Donation Details --}}
                 <div class="mb-8">
 
                     <h2 class="text-lg font-semibold text-gray-700 mb-4">
@@ -47,7 +47,7 @@
 
                     <div class="grid md:grid-cols-2 gap-4">
 
-                        {{-- المتبرع --}}
+                        {{-- Donor --}}
                         <div>
                             <label class="block text-gray-700 font-medium mb-1">
                                 المتبرع
@@ -68,7 +68,7 @@
                         </div>
 
 
-                        {{-- المبلغ --}}
+                        {{-- Amount --}}
                         <div>
                             <label class="block text-gray-700 font-medium mb-1">
                                 المبلغ
@@ -80,7 +80,7 @@
                         </div>
 
 
-                        {{-- النوع --}}
+                        {{-- Type --}}
                         <div>
                             <label class="block text-gray-700 font-medium mb-1">
                                 النوع
@@ -113,7 +113,7 @@
                         </div>
 
 
-                        {{-- التاريخ --}}
+                        {{-- Date --}}
                         <div>
                             <label class="block text-gray-700 font-medium mb-1">
                                 التاريخ
@@ -124,7 +124,7 @@
                         </div>
 
 
-                        {{-- ملاحظات --}}
+                        {{-- Notes --}}
                         <div class="md:col-span-2">
                             <label class="block text-gray-700 font-medium mb-1">
                                 ملاحظات
@@ -138,7 +138,7 @@
                 </div>
 
 
-                {{-- سبب التعديل --}}
+                {{-- Correction Reason --}}
                 <div class="border-t pt-6">
 
                     <h2 class="text-lg font-semibold text-gray-700 mb-4">
@@ -162,7 +162,7 @@
                 </div>
 
 
-                {{-- زر التحديث --}}
+                {{-- Update Button --}}
                 <div class="mt-8 flex justify-end">
 
                     <button type="submit"

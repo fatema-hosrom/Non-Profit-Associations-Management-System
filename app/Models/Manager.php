@@ -30,7 +30,7 @@ class Manager extends Authenticatable
     ];
 
     /**
-     * الجمعيات التي سجّلها هذا المدير كمنشئ (organizations.created_by).
+     * Organizations registered by this manager as creator (organizations.created_by).
      */
     public function createdOrganizations(): HasMany
     {
@@ -38,7 +38,7 @@ class Manager extends Authenticatable
     }
 
     /**
-     * جمعية واحدة مرتبطة بالمدير عند إنشاء الفعاليات/التقارير (آخر جمعية أنشأها).
+     * Single organization linked to the manager when creating activities/reports (latest created organization).
      */
     public function organization(): HasOne
     {

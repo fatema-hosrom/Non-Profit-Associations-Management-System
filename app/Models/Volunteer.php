@@ -32,7 +32,7 @@ class Volunteer extends Authenticatable
     protected $hidden = ['password'];
 
     /**
-     * علاقة طلبات التطوع الخاصة بهذا المتطوع
+     * Volunteer assignment requests relationship
      */
     public function assignments(): HasMany
     {
@@ -40,7 +40,7 @@ class Volunteer extends Authenticatable
     }
 
     /**
-     * الفعاليات التي طلب التطوع فيها
+     * Activities the volunteer has applied to
      */
     public function activities()
     {
@@ -53,7 +53,7 @@ class Volunteer extends Authenticatable
     }
 
     /**
-     * Scopes مفيدة
+     * Useful scopes
      */
     public function scopeAccepted($query)
     {

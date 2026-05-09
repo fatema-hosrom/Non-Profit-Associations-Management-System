@@ -7,7 +7,7 @@
 
         <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-8">
 
-            {{-- العنوان --}}
+            {{-- Title --}}
             <div class="flex items-center justify-between mb-6 border-b pb-4">
                 <h1 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -20,7 +20,7 @@
             </div>
 
 
-            {{-- رسالة نجاح --}}
+            {{-- Success Message --}}
             @if (session('success'))
                 <div id="flash-success"
                     class="mb-6 p-4 bg-green-100 border border-green-300 text-green-800 rounded-lg flex items-center gap-2">
@@ -40,7 +40,7 @@
             @endif
 
 
-            {{-- الأخطاء --}}
+            {{-- Errors --}}
             @if ($errors->any())
                 <div class="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
                     <ul class="list-disc pl-5">
@@ -55,7 +55,7 @@
             <form method="POST" action="{{ route('financial.donations.activity.store', $activity->id) }}">
                 @csrf
 
-                {{-- اختيار المتبرع --}}
+                {{-- Select Donor --}}
                 <div class="mb-6">
                     <label class="block text-gray-700 font-semibold mb-2">المتبرع</label>
 
@@ -75,7 +75,7 @@
                 </div>
 
 
-                {{-- بيانات متبرع جديد --}}
+                {{-- New Donor Fields --}}
                 <div id="new-donor-fields" class="bg-gray-50 border rounded-lg p-6 mb-6">
 
                     <h2 class="text-lg font-semibold text-gray-700 mb-4">
@@ -101,7 +101,7 @@
                 </div>
 
 
-                {{-- بيانات التبرع --}}
+                {{-- Donation Details --}}
                 <div class="border-t pt-6">
 
                     <h2 class="text-lg font-semibold text-gray-700 mb-4">
@@ -137,7 +137,7 @@
                 </div>
 
 
-                {{-- زر الحفظ --}}
+                {{-- Save Button --}}
                 <div class="mt-8 flex justify-end">
 
                     <button type="submit"

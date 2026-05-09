@@ -38,7 +38,7 @@ class ActivityVolunteerAssignment extends Model
     }
 
     /**
-     * كود تحقق مكوّن من 6 خانات (أحرف إنجليزية كبيرة + أرقام)، فريد في الجدول.
+     * Verification code consisting of 6 characters (uppercase English letters + digits), unique in the table.
      */
     public static function generateUniqueCheckinCode(): string
     {

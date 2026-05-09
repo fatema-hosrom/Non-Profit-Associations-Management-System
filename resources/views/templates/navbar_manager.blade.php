@@ -112,7 +112,7 @@
         color: white !important;
     }
 
-    /* عرض الـ sidebar 280px — يجب أن يطابق الهامش حتى لا يختفي المحتوى خلفه */
+    /* Sidebar width 280px — must match margin so content doesn't hide behind it */
     main.main-content {
         margin-right: 280px;
         padding: 16px;

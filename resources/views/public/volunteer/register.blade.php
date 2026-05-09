@@ -34,7 +34,7 @@
         @csrf
         <div class="form-card">
 
-            {{-- SECTION 1: معلومات الحساب --}}
+    {{-- SECTION 1: Account Information --}}
             <div class="fsection">
                 <div class="fsection__head">
                     <span class="bar"></span>
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            {{-- SECTION 2: المعلومات الشخصية --}}
+            {{-- SECTION 2: Personal Information --}}
             <div class="fsection">
                 <div class="fsection__head">
                     <span class="bar"></span>
@@ -110,7 +110,7 @@
                 </div>
             </div>
 
-            {{-- SECTION 3: معلومات التطوع --}}
+            {{-- SECTION 3: Volunteering Information --}}
             <div class="fsection">
                 <div class="fsection__head">
                     <span class="bar"></span>

@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mx-auto px-4 py-6">
 
-    {{-- العنوان --}}
+    {{-- Title --}}
     <h1 class="text-2xl font-bold mb-6 flex items-center gap-2 text-blue-700">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -14,7 +14,7 @@
         الفعاليات التي تحتوي مصاريف
     </h1>
 
-    {{-- فلتر البحث + إضافة --}}
+    {{-- Search Filter + Add --}}
     <div class="mb-6 flex flex-wrap justify-between gap-2 items-center">
 
         <form method="GET" class="flex gap-2 flex-1 min-w-[200px]">
@@ -48,7 +48,7 @@
 
     </div>
 
-    {{-- الجدول --}}
+    {{-- Table --}}
     <div class="bg-white rounded-xl shadow overflow-hidden border">
 
         <table class="w-full table-fixed">
@@ -67,7 +67,7 @@
                     <td class="px-4 py-3 text-gray-600 truncate">{{ $act->description }}</td>
                     <td class="px-4 py-3 flex justify-center gap-3">
 
-                        {{-- عرض المصاريف --}}
+                        {{-- View Expenses --}}
                         <a href="{{ route('financial.expenses.activity.show', $act->id) }}"
                             class="flex items-center gap-1 text-blue-600 hover:text-blue-800">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@
                             عرض
                         </a>
 
-                        {{-- إضافة مصروف --}}
+                        {{-- Add Expense --}}
                         <a href="{{ route('financial.expenses.activity.create', $act->id) }}"
                             class="flex items-center gap-1 text-green-600 hover:text-green-800">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

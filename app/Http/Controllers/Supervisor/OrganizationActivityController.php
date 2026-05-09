@@ -37,7 +37,7 @@ class OrganizationActivityController extends Controller
     }
 
 
-    // Display list of organizations created by current manager
+    // Display list of organizations
     public function getOrganizations(Request $request)
     {
 
@@ -59,7 +59,7 @@ class OrganizationActivityController extends Controller
         return view('html.supervisor.organizations.show', compact('org'));
     }
 
-    // عرض الفعاليات التابعة لجمعية معينة
+    // Display events belonging to a specific organization
     public function getEvents($organizationId)
     {
 
@@ -68,7 +68,7 @@ class OrganizationActivityController extends Controller
         return view('html.supervisor.organizations.events.index', compact('org', 'events'));
     }
 
-    // عرض تفاصيل فعالية جمعية معينة
+    // Display details of a specific organization event
     public function viewEvent($id)
     {
 

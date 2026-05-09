@@ -5,24 +5,24 @@
 @section('content')
     <section class="max-w-6xl mx-auto my-12 px-4">
 
-        <!-- عنوان الفعالية -->
+        <!-- Activity Title -->
         <div class="text-center mb-8">
             <h1 class="text-4xl font-extrabold text-indigo-900 mb-2">{{ $activity->title }}</h1>
             <p class="text-gray-600 text-lg">{{ $activity->description }}</p>
         </div>
 
 
-        <!-- صورة الفعالية -->
+        <!-- Activity Image -->
         <div class="mb-8 overflow-hidden rounded-xl shadow-lg">
             <img src="{{ asset('assets/images/activities/' . ($activity->image ?? 'default-event.png')) }}"
                 alt="{{ $activity->title }}"
                 class="w-full h-96 object-cover transform hover:scale-105 transition duration-500">
         </div>
 
-        <!-- تفاصيل الفعالية -->
+        <!-- Activity Details -->
         <div class="grid md:grid-cols-2 gap-8 mb-12">
 
-            <!-- معلومات الفعالية -->
+            <!-- Activity Information -->
             <div class="bg-white rounded-xl shadow-lg p-6 space-y-4">
                 <h2 class="text-2xl font-bold text-indigo-900 mb-4">تفاصيل الفعالية</h2>
                 <p><strong>نوع الفعالية:</strong>
@@ -41,11 +41,11 @@
                 @endif
             </div>
 
-            <!-- التبرعات أو التطوع -->
+            <!-- Donations or Volunteering -->
             @if($activity->status !== 'draft')
             <div class="space-y-6">
 
-                <!-- قسم التبرع -->
+                <!-- Donation Section -->
                 @if ($activity->activity_type == 'donation' || $activity->activity_type == 'both')
                     @php
                         $donation = $activity->donationSettings;
@@ -75,7 +75,7 @@
                     </div>
                 @endif
 
-                <!-- قسم التطوع -->
+                <!-- Volunteering Section -->
                 @if ($activity->activity_type == 'volunteer' || $activity->activity_type == 'both')
                     @php
                         $volunteer = $activity->volunteerRequirements;
@@ -136,7 +136,7 @@
             @endif
         </div>
 
-        <!-- معلومات إضافية للتبرع -->
+        <!-- Additional Donation Info -->
         @if($activity->activity_type === 'donation' || $activity->activity_type === 'both')
             @php
                 $donation = $activity->donationSettings;
@@ -168,7 +168,7 @@
             @endif
         @endif
 
-        <!-- نتائج الفعالية إذا كانت منجزة أو مسودة -->
+        <!-- Activity Results if completed or draft -->
         @if(($activity->status === 'closed' || $activity->status === 'draft') && $activity->results)
             <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8 mb-12">
                 <div class="text-center mb-8">
@@ -179,7 +179,7 @@
                     <p class="text-gray-600">إنجازات وإحصائيات الفعالية المنجزة</p>
                 </div>
 
-                <!-- إحصائيات النتائج -->
+                <!-- Results Statistics -->
                 <div class="grid md:grid-cols-3 gap-6 mb-8">
                     @if($activity->results->total_volunteers)
                         <div class="bg-white rounded-xl p-6 text-center shadow-lg">
@@ -212,7 +212,7 @@
                     @endif
                 </div>
 
-                <!-- الأهداف المحققة -->
+                <!-- Achieved Goals -->
                 @if($activity->results->goals_achieved)
                     <div class="bg-white rounded-xl p-6 mb-6 shadow-lg">
                         <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
@@ -223,7 +223,7 @@
                     </div>
                 @endif
 
-                <!-- التحديات -->
+                <!-- Challenges -->
                 @if($activity->results->challenges)
                     <div class="bg-white rounded-xl p-6 mb-6 shadow-lg">
                         <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
@@ -245,7 +245,7 @@
                     </div>
                 @endif --}}
 
-                <!-- الصور والفيديوهات -->
+                <!-- Images and Videos -->
                 @if($activity->results->images)
                     @php
                         $images = array_filter(explode("\n", $activity->results->images));
@@ -291,7 +291,7 @@
             </div>
         @endif
 
-        <!-- أزرار العودة -->
+        <!-- Back Buttons -->
         <div class="text-center mt-12">
             <a href="{{ route('public.activities.index') }}"
                 class="inline-block bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-xl font-semibold transition">
@@ -303,7 +303,7 @@
 
     @include('public.activities.partials.donation-modal')
 
-    <!-- Modal لعرض الصور -->
+    <!-- Modal for Image Display -->
     <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4" style="display: none;">
         <div class="relative max-w-4xl max-h-full">
             <img id="modalImage" src="" alt="صورة الفعالية" class="max-w-full max-h-full object-contain">
@@ -327,7 +327,7 @@ function closeModal() {
     document.body.style.overflow = 'auto';
 }
 
-// المودال الخاص بالدفع
+// Payment modal
 const donationModal = document.getElementById('donationModal');
 const openDonationModalButton = document.getElementById('openDonationModal');
 const closeDonationModalButton = document.getElementById('closeDonationModal');
@@ -366,7 +366,7 @@ function openDonationModalFromQuery() {
 
 openDonationModalFromQuery();
 
-// تنزيل الإيصال تلقائيا بعد نجاح الدفع
+// Auto-download receipt after successful payment
 @if(session('receipt_payment_id'))
 window.addEventListener('load', function () {
     const receiptUrl = "{{ route('public.activities.payment.receipt', session('receipt_payment_id')) }}";
@@ -379,7 +379,7 @@ window.addEventListener('load', function () {
 });
 @endif
 
-// إغلاق المودال عند النقر خارج النموذج
+// Close modal when clicking outside the form
 if (donationModal) {
     donationModal.addEventListener('click', function(e) {
         if (e.target === this) {
@@ -388,7 +388,7 @@ if (donationModal) {
     });
 }
 
-// إغلاق أي مودال بالضغط على Escape
+// Close any modal with Escape key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeModal();

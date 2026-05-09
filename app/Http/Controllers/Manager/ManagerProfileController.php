@@ -11,18 +11,17 @@ use Illuminate\Validation\Rule;
 class ManagerProfileController extends Controller
 {
 
-    // عرض الملف الشخصي للمدير
+    // Display manager profile
     public function profile(Request $request)
-
     {
      $manager = Auth::guard('manager')->user();
 
         return view('html.manager.profile.profile', compact('manager'));
     }
 
-    // تعديل الملف الشخصي للمدير
+    // Edit manager profile
 
-    // عرض نموذج التعديل)(GET)
+    // Display edit form (GET)
     public function editProfile(Request $request)
     {
         $manager = Auth::guard('manager')->user();
@@ -53,24 +52,24 @@ class ManagerProfileController extends Controller
 
                 'phone'     => 'nullable|string|max:20',
 
-                // كلمة المرور اختيارية
+                // Password is optional
                 'password'  => 'nullable|string|min:8|confirmed',
 
                 [
-                    'username.unique' => 'اسم المستخدم مستخدم بالفعل.',
-                    'email.unique' => 'البريد الإلكتروني مستخدم بالفعل.',
-                    'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.'
+                    'username.unique' => 'Username is already taken.',
+                    'email.unique' => 'Email address is already in use.',
+                    'password.confirmed' => 'Password confirmation does not match.'
                 ],
             ]);
 
-            // تحديث كلمة المرور فقط إذا تم إدخالها
+            // Update password only if provided
             if ($request->filled('password')) {
                 $data['password'] = bcrypt($request->password);
             } else {
-                unset($data['password']); // لا نرسلها للتحديث
+                unset($data['password']); // Do not send it for update
             }
 
-            // تحديث البيانات
+            // Update data
             $manager->update($data);
 
             return redirect()->route('manager.profile')

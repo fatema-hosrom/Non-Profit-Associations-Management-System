@@ -65,7 +65,7 @@
                         </div>
                     </div>
 
-                    <!-- نافذة التأكيد -->
+                    <!-- Confirmation Modal -->
                     <div class="modal fade" id="deleteModal{{ $org['id'] }}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">

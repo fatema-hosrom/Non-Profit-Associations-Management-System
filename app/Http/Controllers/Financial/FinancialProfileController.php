@@ -48,6 +48,6 @@ class FinancialProfileController extends Controller
         }
         $manager->save();
 
-        return back()->with('success', 'تم تحديث الملف الشخصي بنجاح');
+        return back()->with('success', 'Profile updated successfully');
     }
 }

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrganizationController extends Controller
 {
-    // عرض قائمة الجمعيات التي أنشأها المدير الحالي
+    // Display the list of organizations created by the current manager
     public function getOrganizations(Request $request)
     {
         $manager = Auth::guard('manager')->user();
@@ -25,14 +25,14 @@ class OrganizationController extends Controller
     }
 
 
-    // عرض تفاصيل جمعية
+    // Display organization details
     public function viewOrganization($id)
     {
-        //التحقق من ملكية الجمعية
+        // Verify organization ownership
         $manager = Auth::guard('manager')->user();
         $managerId = $manager->id;
 
-        // جلب الجمعية مع فعالياتها
+        // Fetch the organization with its events
         $org = Organization::where('id', $id)
             ->where('created_by', $managerId)
             ->with('events')
@@ -41,16 +41,14 @@ class OrganizationController extends Controller
     }
 
     //=================================================================================
-    // إضافة جمعية
-    // عرض نموذج إنشاء جمعية (GET)
+    // Add an organization
+    // Display create organization form (GET)
     public function addOrganization()
     {
-
-
         return view('html.manager.organizations.add_organization');
     }
 
-    // معالجة إنشاء جمعية (POST)
+    // Handle organization creation (POST)
     public function storeOrganization(Request $request)
     {
         $manager = Auth::guard('manager')->user();
@@ -87,9 +85,9 @@ class OrganizationController extends Controller
 
 
     //=================================================================================
-    // تعديل جمعية
+    // Edit an organization
 
-    // عرض نموذج تعديل جمعية (GET)
+    // Show the edit form for an organization (GET)
     public function editOrganization($id, Request $request)
     {
         $manager = Auth::guard('manager')->user();
@@ -99,7 +97,7 @@ class OrganizationController extends Controller
         return view('html.manager.organizations.edit_organization', compact('org'));
     }
 
-    // معالجة تحديث جمعية (PUT)
+    // Handle organization update (PUT)
     public function updateOrganization(Request $request, $id)
     {
         $manager = Auth::guard('manager')->user();
@@ -117,12 +115,12 @@ class OrganizationController extends Controller
             'status' => 'nullable|in:active,inactive',
         ]);
 
-        // معالجة رفع الشعار الجديد إذا تم تقديمه
+        // Handle updating the new logo if it was provided
         if ($request->hasFile('logo')) {
             $logoName = uniqid() . '.' . $request->file('logo')->getClientOriginalExtension();
             $request->file('logo')->move(public_path('assets/images/organizations'), $logoName);
             $data['logo'] = $logoName;
-            // حذف الصورة القديمة إن وجدت
+            // Delete old image if exists
             if ($org->logo) {
                 $oldPath = public_path('assets/images/organizations/' . $org->logo);
                 if (file_exists($oldPath)) unlink($oldPath);
@@ -130,12 +128,12 @@ class OrganizationController extends Controller
         } else {
             $data['logo'] = $org->logo;
         }
-        // تحديث بيانات الجمعية
+        // Update organization data
         $org->update($data);
         return redirect()->route('manager.organizations.index')->with('success', 'تم تحديث الجمعية بنجاح');
     }
 
-    // حذف جمعية (DELETE)
+    // Delete organization (DELETE)
     public function destroyOrganization($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -151,13 +149,9 @@ class OrganizationController extends Controller
     }
 
 
-
-
-
     //  ----------------------------------------------------------------------------------//
 
-    //   الفعاليات تحت الجمعيات
-
+    // Events under organizations
 
     public function getEvents($organizationId)
     {
@@ -168,7 +162,7 @@ class OrganizationController extends Controller
         return view('html.manager.organizations.event.events', compact('org', 'events'));
     }
 
-    // عرض تفاصيل فعالية جمعية
+    // Display organization event details
     public function viewEvent($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -177,8 +171,8 @@ class OrganizationController extends Controller
         return view('html.manager.organizations.event.view_event', compact('event'));
     }
 
-    // إضافة فعالية جديدة لجمعية
-    // عرض نموذج إنشاء فعالية (GET)
+    // Add a new event to an organization
+    // Display create event form (GET)
     public function createEvent(Request $request, $organizationId)
     {
         $manager = Auth::guard('manager')->user();
@@ -187,7 +181,7 @@ class OrganizationController extends Controller
         return view('html.manager.organizations.event.add_event', compact('org'));
     }
 
-    // معالجة إنشاء فعالية (POST)
+    // Handle event creation (POST)
     public function storeEvent(Request $request, $organizationId)
     {
         $manager = Auth::guard('manager')->user();
@@ -225,8 +219,8 @@ class OrganizationController extends Controller
     }
 
 
-    // تعديل فعالية جمعية
-    // عرض نموذج تعديل فعالية (GET)
+    // Edit organization event
+    // Display edit event form (GET)
     public function editEvent($id)
     {
         $manager = Auth::guard('manager')->user();
@@ -234,7 +228,8 @@ class OrganizationController extends Controller
         $event = OrganizationEvent::where('id', $id)->where('created_by', $managerId)->firstOrFail();
         return view('html.manager.organizations.event.edit_event', compact('event'));
     }
-    // معالجة تحديث فعالية (PUT)
+
+    // Handle event update (PUT)
     public function updateEvent(Request $request, $id)
     {
         $manager = Auth::guard('manager')->user();
@@ -269,7 +264,7 @@ class OrganizationController extends Controller
         return redirect()->route('manager.organizations.events.index', ['orgId' => $event->organization_id])->with('success', 'تم تحديث الفعالية بنجاح');
     }
 
-    // حذف فعالية جمعية (DELETE)
+    // Delete organization event (DELETE)
     public function destroyEvent($id)
     {
         $manager = Auth::guard('manager')->user();

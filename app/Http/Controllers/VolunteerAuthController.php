@@ -8,16 +8,18 @@ use Illuminate\Support\Facades\Auth;
 class VolunteerAuthController extends Controller
 {
     /**
-     * فتح نافذة تسجيل الدخول (مودال موجود في القالب العام) عبر إعادة التوجيه مع معلمة في الرابط.
+     * Open the login window (modal in the shared template) via redirect with a parameter in the URL.
      */
     public function showLogin(Request $request)
     {
         $target = route('public.home');
 
         $previous = url()->previous();
-        if ($previous
+        if (
+            $previous
             && $previous !== $request->fullUrl()
-            && str_starts_with($previous, $request->getSchemeAndHttpHost())) {
+            && str_starts_with($previous, $request->getSchemeAndHttpHost())
+        ) {
             $target = $previous;
         }
 
@@ -59,13 +61,13 @@ class VolunteerAuthController extends Controller
     }
 
     /**
-     * تسجيل الخروج
+     * Logout
      */
-  public function logout(Request $request)
-{
-    Auth::guard('volunteer')->logout();
+    public function logout(Request $request)
+    {
+        Auth::guard('volunteer')->logout();
 
-    return redirect()->route('public.home')
-        ->with('success', 'تم تسجيل الخروج بنجاح');
-}
+        return redirect()->route('public.home')
+            ->with('success', 'تم تسجيل الخروج بنجاح');
+    }
 }

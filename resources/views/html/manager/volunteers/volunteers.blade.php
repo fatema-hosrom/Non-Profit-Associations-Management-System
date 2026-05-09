@@ -233,7 +233,7 @@
 
                     setTimeout(dismissSuccessAlert, 7000);
 
-                    // إغلاق الـ Modal عند النقر خارجه
+                    // Close Modal when clicking outside
                     document.getElementById('deleteModal')?.addEventListener('click', function(e) {
                         if (e.target === this) {
                             closeDeleteModal();

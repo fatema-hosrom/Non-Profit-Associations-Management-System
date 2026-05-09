@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="available-activities-container">
-        <!-- رسائل -->
+        <!-- Messages -->
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}

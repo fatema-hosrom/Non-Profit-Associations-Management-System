@@ -107,7 +107,7 @@ class FinancialExpenseController extends Controller
             ->with('success', 'تم إضافة المصروف بنجاح');
     }
 
-    // تعديل مصروف
+    // Edit expense
     public function editExpense($activityId, $expenseId, Request $request)
     {
         $activity = OrganizationActivity::where('id', $activityId)
@@ -158,7 +158,7 @@ class FinancialExpenseController extends Controller
             ->with('success', 'تم تحديث المصروف بنجاح');
     }
 
-    // حذف الملف الخاص بالمصروف
+    // Delete the receipt file associated with the expense
     public function deleteReceipt($activityId, $expenseId, Request $request)
     {
         $activity = OrganizationActivity::where('id', $activityId)
@@ -168,19 +168,19 @@ class FinancialExpenseController extends Controller
             ->where('activity_id', $activityId)
             ->firstOrFail();
 
-        // حذف الملف من النظام
+        // Delete the file from the filesystem
         if ($expense->receipt && file_exists(public_path($expense->receipt))) {
             unlink(public_path($expense->receipt));
         }
 
-        // تحديث السجل بحذف مسار الملف
+        // Update the record by removing the file path
         $expense->update(['receipt' => null]);
 
         return redirect()->route('financial.expenses.activity.show', $activityId)
             ->with('success', 'تم حذف الملف بنجاح');
     }
 
-    // حذف المصروف (معلق)
+    // Delete expense (suspended)
     // public function destroyExpense($activityId, $expenseId, Request $request)
     // {
     //     $managerId = $request->session()->get('financial_manager_id');
@@ -189,6 +189,6 @@ class FinancialExpenseController extends Controller
     //         ->firstOrFail();
     //     $expense->delete();
     //     return redirect()->route('financial.expenses.activity.show', $activityId)
-    //         ->with('success', 'تم حذف المصروف بنجاح');
+    //         ->with('success', 'Expense deleted successfully');
     // }
 }

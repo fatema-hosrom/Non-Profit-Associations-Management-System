@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-    {{-- لا تستخدم class main-content هنا: الـ layout يضعه على <main> فقط، وإلا يتكرر margin-right ويحدث سكرول أفقي --}}
+    {{-- Do not use main-content class here: the layout places it on <main> only, otherwise margin-right repeats and causes horizontal scroll --}}
     <div class="container py-3 supervisor-activities-page">
 
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">

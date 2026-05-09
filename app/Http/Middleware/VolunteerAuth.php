@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class VolunteerAuth
 {
     /**
-     * معالج للتحقق من تسجيل دخول المتطوع
+     * Middleware to verify volunteer login
      */
     public function handle(Request $request, Closure $next)
     {

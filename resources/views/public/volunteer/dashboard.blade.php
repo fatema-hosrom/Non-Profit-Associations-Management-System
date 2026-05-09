@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="volunteer-dashboard">
-        <!-- رسائل النجاح
+        <!-- Success Messages
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -12,7 +12,7 @@
             </div>
         @endif -->
 
-        <!-- الرأس -->
+        <!-- Header -->
         <div class="dashboard-header">
             <div class="header-content">
                 <h1>مرحباً {{ $volunteer->name }}</h1>
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <!-- الإحصائيات -->
+        <!-- Statistics -->
         <div class="statistics-grid">
             <div class="stat-card">
                 <div class="stat-icon pending">▼</div>
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <!-- الخيارات الرئيسية -->
+        <!-- Main Options -->
         <div class="dashboard-menu">
             <a href="{{ route('volunteer.profile') }}" class="menu-card">
                 <div class="menu-icon">👤</div>

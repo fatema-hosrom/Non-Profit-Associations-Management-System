@@ -5,7 +5,7 @@
 @section('content')
     <div class="main-content">
         <div class="container mx-auto px-4 py-6">
-            <!-- رسائل النجاح والخطأ -->
+            <!-- Success and Error Messages -->
             @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 flex items-center">
                     <i class="fas fa-check-circle ml-2"></i>
@@ -20,7 +20,7 @@
                 </div>
             @endif
 
-            <!-- العنوان -->
+            <!-- Title -->
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold text-gray-800">
                     <i class="fas fa-user-plus ml-2 text-blue-600"></i>
@@ -28,7 +28,7 @@
                 </h1>
             </div>
 
-            <!-- وصف الصفحة -->
+            <!-- Page Description -->
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                 <p class="text-blue-800">
                     <i class="fas fa-info-circle ml-2"></i>
@@ -37,7 +37,7 @@
                 </p>
             </div>
             
-            <!-- حقل البحث -->
+            <!-- Search Field -->
             <div class="mb-6">
                 <form method="GET" action="{{ route('manager.activity_volunteers.index') }}" class="flex gap-2">
                     <div class="flex-grow">
@@ -59,7 +59,7 @@
                 </form>
             </div>
 
-            <!-- قائمة الفعاليات -->
+            <!-- Activities List -->
             <div class="grid gap-6">
                 @forelse($activities as $activity)
                     <div class="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
@@ -78,7 +78,7 @@
                         <!-- محتوى البطاقة -->
                         <div class="p-6">
                             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-                                <!-- تاريخ الفعالية -->
+                                <!-- Activity Date -->
                                 <div class="bg-gray-50 rounded-lg p-3">
                                     <div class="flex items-center">
                                         <i class="fas fa-calendar-alt text-blue-600 ml-2"></i>
@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
 
-                                <!-- وقت الفعالية -->
+                                <!-- Activity Time -->
                                 <div class="bg-gray-50 rounded-lg p-3">
                                     <div class="flex items-center">
                                         <i class="fas fa-clock text-green-600 ml-2"></i>
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
 
-                                <!-- عدد المتطوعين المطلوب -->
+                                <!-- Required Volunteers Count -->
                                 <div class="bg-gray-50 rounded-lg p-3">
                                     <div class="flex items-center">
                                         <i class="fas fa-users text-purple-600 ml-2"></i>
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
 
-                                <!-- عدد المتطوعين المسجلين -->
+                                <!-- Registered Volunteers Count -->
                                 <div class="bg-gray-50 rounded-lg p-3">
                                     <div class="flex items-center">
                                         <i class="fas fa-user-check text-orange-600 ml-2"></i>
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                 @empty
-                    <!-- حالة عدم وجود فعاليات -->
+                    <!-- No Activities State -->
                     <div class="bg-white rounded-lg shadow-md border border-gray-200 p-8 text-center">
                         <i class="fas fa-calendar-times text-6xl text-gray-300 mb-4"></i>
                         <h3 class="text-xl font-semibold text-gray-600 mb-2">لا توجد فعاليات تحتاج متطوعين</h3>
